@@ -25,15 +25,19 @@ class HomeTab extends StatelessWidget {
           slivers: <Widget>[
             SliverAppBar(
               floating: true,
+              expandedHeight: 100,
               backgroundColor: Colors.transparent,
               snap: true,
               elevation: 0,
               flexibleSpace: FlexibleSpaceBar(
-                title: const Text(
-                  'Agência Scholz',
-                  style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w800, letterSpacing: 1.5),
+                title: Container(
+                  child: Image.asset(
+                    'assets/images/Logotipo-4.png',
+                    scale: 3,
+                    color: Colors.white,
+                    fit: BoxFit.cover,
+                  ),
                 ),
-                centerTitle: true,
               ),
             ),
             FutureBuilder<QuerySnapshot>(
