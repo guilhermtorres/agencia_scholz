@@ -1,6 +1,5 @@
 import 'package:agencia_scholz/app/src/views/home_views.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AgenciaScholzApp extends StatelessWidget {
   const AgenciaScholzApp({Key key}) : super(key: key);
@@ -43,6 +42,7 @@ class AgenciaScholzApp extends StatelessWidget {
                   fontFamily: 'Raleway',
                   color: Colors.white,
                   fontWeight: FontWeight.w800,
+                  fontSize: 20,
                   letterSpacing: 3,
                 ),
               ),

@@ -1,19 +1,15 @@
+import 'package:agencia_scholz/app/src/views/initial_tab_views.dart';
 import 'package:flutter/material.dart';
 
 class HomeViews extends StatelessWidget {
-  const HomeViews({Key key}) : super(key: key);
+  final _pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        elevation: 5,
-        title: Text('Agência Scholz'),
-      ),
-      body: Center(
-        child: Text('App Agência Scholz'),
-      ),
+    return PageView(
+      controller: _pageController,
+      physics: NeverScrollableScrollPhysics(),
+      children: <Widget>[HomeTab()],
     );
   }
 }

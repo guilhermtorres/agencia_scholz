@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "310463178891",
+    "firebase_url": "https://agenciascholz-89135.firebaseio.com",
+    "project_id": "agenciascholz-89135",
+    "storage_bucket": "agenciascholz-89135.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:310463178891:android:054f4925c4962fce524c8e",
+        "android_client_info": {
+          "package_name": "com.caretech.agencia_scholz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "310463178891-hjtovedbsur5luujtah8r87m21rh6hf7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.caretech.agencia_scholz",
+            "certificate_hash": "689f9172524fe10817f89f7709e95188dcd4b25a"
+          }
+        },
+        {
+          "client_id": "310463178891-q3g4aub01hdbucqps0ra1u0co84rob6n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9qmbqhlgDz16X1zxfmmhOmtQjWiO-7bg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "310463178891-q3g4aub01hdbucqps0ra1u0co84rob6n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
