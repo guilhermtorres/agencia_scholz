@@ -1,6 +1,5 @@
 import 'package:agencia_scholz/app/src/data/product_data.dart';
 import 'package:agencia_scholz/app/src/views/product_detail_view.dart';
-import 'package:agencia_scholz/app/src/views/products_views.dart';
 import 'package:flutter/material.dart';
 
 class ProductTile extends StatelessWidget {
