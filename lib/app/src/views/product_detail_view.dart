@@ -114,6 +114,43 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                     ),
                   ),
                 ),
+                SizedBox(
+                  height: 20,
+                ),
+                SizedBox(
+                  height: 45,
+                  child: RaisedButton(
+                    onPressed: type != null ? () {} : null,
+                    child: Text(
+                      'Adicionar ao Carrinho',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  'O que inclui nosso serviço?',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  product.description,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.black,
+                  ),
+                ),
               ],
             ),
           ),
