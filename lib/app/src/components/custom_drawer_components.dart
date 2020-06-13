@@ -1,4 +1,5 @@
 import 'package:agencia_scholz/app/src/components/drawer_tile_components.dart';
+import 'package:agencia_scholz/app/src/views/login_views.dart';
 import 'package:flutter/material.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -64,14 +65,20 @@ class CustomDrawer extends StatelessWidget {
                           ),
                           GestureDetector(
                             child: Text(
-                              'Entre ou Cadastre-se >',
+                              'Entre ou cadastre-se >',
                               style: TextStyle(
                                 fontSize: 20,
                                 color: Theme.of(context).accentColor,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => LoginViews(),
+                                ),
+                              );
+                            },
                           ),
                         ],
                       ),

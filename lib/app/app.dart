@@ -2,8 +2,6 @@ import 'package:agencia_scholz/app/src/views/home_views.dart';
 import 'package:flutter/material.dart';
 
 class AgenciaScholzApp extends StatelessWidget {
-  const AgenciaScholzApp({Key key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -11,13 +9,16 @@ class AgenciaScholzApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         cursorColor: const Color(0xFF00d856),
-        buttonColor: const Color(0xFF8C35F1),
+        buttonTheme: ButtonThemeData(
+          disabledColor: Colors.grey[300],
+          buttonColor: const Color(0xFF8C35F1),
+        ),
         indicatorColor: Colors.blue,
         accentColor: const Color(0xFF9F56F3),
-        hintColor: const Color(0xFFF3E600),
+        hintColor: const Color(0xFF9F56F3),
         primarySwatch: Colors.blue,
         primaryColor: const Color(0xFF00d856),
-        fontFamily: '',
+        fontFamily: 'Raleway',
         canvasColor: Colors.white,
         textTheme: ThemeData.light().textTheme.copyWith(
               bodyText2: TextStyle(

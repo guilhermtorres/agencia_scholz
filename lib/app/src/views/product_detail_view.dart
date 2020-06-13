@@ -58,7 +58,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                   'R\$ ${product.price.toStringAsFixed(2)}',
                   style: TextStyle(
                     fontSize: 28,
-                    color: Theme.of(context).accentColor,
+                    color: Colors.red,
                     fontWeight: FontWeight.w700,
                   ),
                   maxLines: 3,
