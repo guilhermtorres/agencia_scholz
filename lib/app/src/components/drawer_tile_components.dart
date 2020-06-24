@@ -1,4 +1,6 @@
+import 'package:agencia_scholz/app/src/models/page_manager_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class DrawerTile extends StatelessWidget {
   final IconData icon;
@@ -10,12 +12,12 @@ class DrawerTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final int curPage = context.watch<PageManager>().page;
     return Material(
       color: Colors.transparent,
       child: InkWell(
         onTap: () {
-          Navigator.of(context).pop();
-          controller.jumpToPage(page);
+          context.read<PageManager>().setPage(page);
         },
         child: Container(
           height: 60,
@@ -28,7 +30,7 @@ class DrawerTile extends StatelessWidget {
               Icon(
                 icon,
                 size: 32,
-                color: controller.page.round() == page ? Theme.of(context).accentColor : Colors.white,
+                color: curPage == page ? Theme.of(context).accentColor : Colors.white,
               ),
               SizedBox(
                 width: 32,
@@ -38,7 +40,7 @@ class DrawerTile extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: controller.page.round() == page ? Theme.of(context).accentColor : Colors.white,
+                  color: curPage == page ? Theme.of(context).accentColor : Colors.white,
                 ),
               ),
             ],

@@ -45,6 +45,7 @@ class CreateLoginViews extends StatelessWidget {
                     ),
                     validator: (text) {
                       if (text.isEmpty) return 'Nome inválido!';
+                      return null;
                     },
                   ),
                 ),
@@ -66,6 +67,7 @@ class CreateLoginViews extends StatelessWidget {
                     ),
                     validator: (text) {
                       if (text.isEmpty) return 'Endereço inválido!';
+                      return null;
                     },
                   ),
                 ),
@@ -88,6 +90,7 @@ class CreateLoginViews extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     validator: (text) {
                       if (text.isEmpty || !text.contains('@')) return 'E-mail inválido!';
+                      return null;
                     },
                   ),
                 ),
@@ -108,6 +111,7 @@ class CreateLoginViews extends StatelessWidget {
                     ),
                     validator: (text) {
                       if (text.isEmpty || text.length < 6) return 'Senha Inválida!';
+                      return null;
                     },
                   ),
                 ),

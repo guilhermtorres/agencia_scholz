@@ -1,8 +1,11 @@
+import 'package:agencia_scholz/app/src/utils/validators_utils.dart';
 import 'package:agencia_scholz/app/src/views/create_login_views.dart';
 import 'package:flutter/material.dart';
 
 class LoginViews extends StatelessWidget {
-  final _formKey = GlobalKey<FormState>();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,6 +58,7 @@ class LoginViews extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 5),
                   child: TextFormField(
+                    controller: emailController,
                     autocorrect: false,
                     decoration: InputDecoration(
                       hintText: '   E-mail',
@@ -63,8 +67,9 @@ class LoginViews extends StatelessWidget {
                       ),
                     ),
                     keyboardType: TextInputType.emailAddress,
-                    validator: (text) {
-                      if (text.isEmpty || !text.contains('@')) return 'E-mail inválido!';
+                    validator: (email) {
+                      if (!emailValid(email)) return 'E-mail inválido!';
+                      return null;
                     },
                   ),
                 ),
@@ -77,6 +82,7 @@ class LoginViews extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 5),
                   child: TextFormField(
+                    controller: passController,
                     decoration: InputDecoration(
                       hintText: '   Senha',
                       hintStyle: TextStyle(
@@ -84,8 +90,9 @@ class LoginViews extends StatelessWidget {
                       ),
                     ),
                     obscureText: true,
-                    validator: (text) {
-                      if (text.isEmpty || text.length < 6) return 'Senha Inválida!';
+                    validator: (pass) {
+                      if (pass.isEmpty || pass.length < 6) return 'Senha Inválida!';
+                      return null;
                     },
                   ),
                 ),
@@ -112,7 +119,10 @@ class LoginViews extends StatelessWidget {
                 height: 45,
                 child: RaisedButton(
                   onPressed: () {
-                    if (_formKey.currentState.validate()) {}
+                    if (_formKey.currentState.validate()) {
+                      emailController.text;
+                      passController.text;
+                    }
                   },
                   child: Text(
                     'Entrar',
