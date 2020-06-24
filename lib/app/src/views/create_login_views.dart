@@ -1,6 +1,8 @@
+import 'package:agencia_scholz/app/src/models/user_manager_model.dart';
 import 'package:agencia_scholz/app/src/models/user_model.dart';
 import 'package:agencia_scholz/app/src/utils/validators_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CreateLoginViews extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -164,15 +166,27 @@ class CreateLoginViews extends StatelessWidget {
                     if (_formKey.currentState.validate()) {
                       _formKey.currentState.save();
                       if (user.password != user.confirmPassword) {
-                        scaffoldKey.currentState.showSnackBar(
-                          SnackBar(
-                            content: const Text('As senhas precisam ser iguais!'),
-                            backgroundColor: Colors.red,
-                          ),
-                        );
-
+                        scaffoldKey.currentState.showSnackBar(SnackBar(
+                          content: const Text('As senhas precisam ser iguais!'),
+                          backgroundColor: Colors.red,
+                        ));
                         return;
                       }
+                      context.read<UserManager>().signUp(
+                            user: user,
+                            onSucess: () {
+                              debugPrint('sucesso!');
+                              // TODO: POP.
+                            },
+                            onFail: (e) {
+                              scaffoldKey.currentState.showSnackBar(
+                                SnackBar(
+                                  content: Text('Falha ao cadastrar:  $e '),
+                                  backgroundColor: Colors.red,
+                                ),
+                              );
+                            },
+                          );
                     }
                   },
                   child: Text(

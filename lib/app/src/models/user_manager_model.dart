@@ -33,6 +33,25 @@ class UserManager extends ChangeNotifier {
     _loading = false;
   }
 
+  Future<void> signUp({User user, Function onFail, Function onSucess}) async {
+    _loading = true;
+    try {
+      final AuthResult result = await auth.createUserWithEmailAndPassword(
+        email: user.email,
+        password: user.password,
+      );
+
+      user.id = result.user.uid;
+      await user.saveData();
+
+      onSucess();
+    } on PlatformException catch (e) {
+      print(getErrorString(e.code));
+      onFail(getErrorString(e.code));
+    }
+    _loading = false;
+  }
+
   set loading(bool value) {
     _loading = value;
     notifyListeners();
