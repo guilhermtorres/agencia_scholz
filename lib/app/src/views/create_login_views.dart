@@ -1,13 +1,18 @@
+import 'package:agencia_scholz/app/src/models/user_model.dart';
+import 'package:agencia_scholz/app/src/utils/validators_utils.dart';
 import 'package:flutter/material.dart';
 
 class CreateLoginViews extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  final User user = User();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       appBar: AppBar(
         title: Container(
-          child: Text(
+          child: const Text(
             'Criar Conta',
           ),
         ),
@@ -20,7 +25,7 @@ class CreateLoginViews extends StatelessWidget {
           child: ListView(
             children: <Widget>[
               SizedBox(
-                height: 50,
+                height: 30,
               ),
               Container(
                 child: Image.asset(
@@ -29,13 +34,14 @@ class CreateLoginViews extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 60,
+                height: 40,
               ),
               Card(
                 elevation: 5,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 5),
                   child: TextFormField(
+                    onSaved: (name) => user.name = name,
                     autocorrect: false,
                     decoration: InputDecoration(
                       hintText: '   Nome Completo',
@@ -43,13 +49,37 @@ class CreateLoginViews extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    validator: (text) {
-                      if (text.isEmpty) return 'Nome inválido!';
+                    validator: (name) {
+                      if (name.isEmpty)
+                        return 'Campo Obrigatório';
+                      else if (name.trim().split(' ').length <= 1) return 'Preencha seu nome completo!';
                       return null;
                     },
                   ),
                 ),
               ),
+              // SizedBox(
+              //   height: 20,
+              // ),
+              // Card(
+              //   elevation: 5,
+              //   child: Padding(
+              //     padding: const EdgeInsets.only(left: 5),
+              //     child: TextFormField(
+              //       autocorrect: false,
+              //       decoration: InputDecoration(
+              //         hintText: '   Endereço',
+              //         hintStyle: TextStyle(
+              //           fontWeight: FontWeight.bold,
+              //         ),
+              //       ),
+              //       validator: (text) {
+              //         if (text.isEmpty) return 'Endereço inválido!';
+              //         return null;
+              //       },
+              //     ),
+              //   ),
+              // ),
               SizedBox(
                 height: 20,
               ),
@@ -58,28 +88,7 @@ class CreateLoginViews extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 5),
                   child: TextFormField(
-                    autocorrect: false,
-                    decoration: InputDecoration(
-                      hintText: '   Endereço',
-                      hintStyle: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    validator: (text) {
-                      if (text.isEmpty) return 'Endereço inválido!';
-                      return null;
-                    },
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Card(
-                elevation: 5,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 5),
-                  child: TextFormField(
+                    onSaved: (email) => user.email = email,
                     autocorrect: false,
                     decoration: InputDecoration(
                       hintText: '   E-mail',
@@ -88,8 +97,10 @@ class CreateLoginViews extends StatelessWidget {
                       ),
                     ),
                     keyboardType: TextInputType.emailAddress,
-                    validator: (text) {
-                      if (text.isEmpty || !text.contains('@')) return 'E-mail inválido!';
+                    validator: (email) {
+                      if (email.isEmpty)
+                        return 'Campo Obrigatório!';
+                      else if (!emailValid(email)) return 'E-mail inválido!';
                       return null;
                     },
                   ),
@@ -103,14 +114,41 @@ class CreateLoginViews extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 5),
                   child: TextFormField(
+                    onSaved: (pass) => user.password = pass,
                     decoration: InputDecoration(
                       hintText: '   Senha',
                       hintStyle: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    validator: (text) {
-                      if (text.isEmpty || text.length < 6) return 'Senha Inválida!';
+                    validator: (pass) {
+                      if (pass.isEmpty)
+                        return 'Campo Obrigatório!';
+                      else if (pass.length < 6) return 'Senha muito curta!';
+                      return null;
+                    },
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Card(
+                elevation: 5,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 5),
+                  child: TextFormField(
+                    onSaved: (pass) => user.confirmPassword = pass,
+                    decoration: InputDecoration(
+                      hintText: '   Repita a Senha',
+                      hintStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    validator: (pass) {
+                      if (pass.isEmpty)
+                        return 'Campo Obrigatório!';
+                      else if (pass.length < 6) return 'Senha muito curta!';
                       return null;
                     },
                   ),
@@ -123,7 +161,19 @@ class CreateLoginViews extends StatelessWidget {
                 height: 45,
                 child: RaisedButton(
                   onPressed: () {
-                    if (_formKey.currentState.validate()) {}
+                    if (_formKey.currentState.validate()) {
+                      _formKey.currentState.save();
+                      if (user.password != user.confirmPassword) {
+                        scaffoldKey.currentState.showSnackBar(
+                          SnackBar(
+                            content: const Text('As senhas precisam ser iguais!'),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+
+                        return;
+                      }
+                    }
                   },
                   child: Text(
                     'Cadastrar Conta',

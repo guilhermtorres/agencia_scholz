@@ -1,7 +1,6 @@
 import 'package:agencia_scholz/app/src/models/user_manager_model.dart';
 import 'package:agencia_scholz/app/src/models/user_model.dart';
 import 'package:agencia_scholz/app/src/utils/validators_utils.dart';
-import 'package:agencia_scholz/app/src/views/create_login_views.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -24,11 +23,7 @@ class LoginViews extends StatelessWidget {
         actions: <Widget>[
           FlatButton(
             onPressed: () {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (context) => CreateLoginViews(),
-                ),
-              );
+              Navigator.of(context).pushReplacementNamed('/create_login_views');
             },
             child: Text(
               'Criar conta',
@@ -138,7 +133,7 @@ class LoginViews extends StatelessWidget {
                               onFail: (e) {
                                 scaffoldKey.currentState.showSnackBar(
                                   SnackBar(
-                                    content: Text('Falha ao entrar: $e'),
+                                    content: Text('Falha ao entrar:  $e '),
                                     backgroundColor: Colors.red,
                                   ),
                                 );
