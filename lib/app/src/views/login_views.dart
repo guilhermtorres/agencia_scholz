@@ -1,11 +1,14 @@
+import 'package:agencia_scholz/app/src/models/user_manager_model.dart';
+import 'package:agencia_scholz/app/src/models/user_model.dart';
 import 'package:agencia_scholz/app/src/utils/validators_utils.dart';
 import 'package:agencia_scholz/app/src/views/create_login_views.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LoginViews extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passController = TextEditingController();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +39,7 @@ class LoginViews extends StatelessWidget {
         ],
       ),
       body: Form(
-        key: _formKey,
+        key: formKey,
         child: Padding(
           padding: const EdgeInsets.only(left: 40, top: 40, right: 40),
           child: ListView(
@@ -119,9 +122,15 @@ class LoginViews extends StatelessWidget {
                 height: 45,
                 child: RaisedButton(
                   onPressed: () {
-                    if (_formKey.currentState.validate()) {
-                      emailController.text;
-                      passController.text;
+                    if (formKey.currentState.validate()) {
+                      context.read<UserManager>().signIn(
+                          user: User(
+                            email: emailController.text,
+                            password: passController.text,
+                          ),
+                          onFail: (e) {
+                            print(e);
+                          });
                     }
                   },
                   child: Text(
