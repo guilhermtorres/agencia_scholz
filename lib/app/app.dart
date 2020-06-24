@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 class AgenciaScholzApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Provider(
+    return ChangeNotifierProvider(
       create: (_) => UserManager(),
       child: MaterialApp(
         home: HomeViews(),

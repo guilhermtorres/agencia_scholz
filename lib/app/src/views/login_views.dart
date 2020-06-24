@@ -9,9 +9,11 @@ class LoginViews extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       appBar: AppBar(
         title: Container(
           child: Text(
@@ -40,9 +42,10 @@ class LoginViews extends StatelessWidget {
       ),
       body: Form(
         key: formKey,
-        child: Padding(
-          padding: const EdgeInsets.only(left: 40, top: 40, right: 40),
-          child: ListView(
+        child: Consumer<UserManager>(builder: (_, userManager, __) {
+          return ListView(
+            padding: const EdgeInsets.only(left: 20, top: 40, right: 20),
+            shrinkWrap: true,
             children: <Widget>[
               SizedBox(
                 height: 50,
@@ -62,6 +65,7 @@ class LoginViews extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 5),
                   child: TextFormField(
                     controller: emailController,
+                    enabled: !userManager.loading,
                     autocorrect: false,
                     decoration: InputDecoration(
                       hintText: '   E-mail',
@@ -86,6 +90,7 @@ class LoginViews extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 5),
                   child: TextFormField(
                     controller: passController,
+                    enabled: !userManager.loading,
                     decoration: InputDecoration(
                       hintText: '   Senha',
                       hintStyle: TextStyle(
@@ -121,30 +126,47 @@ class LoginViews extends StatelessWidget {
               SizedBox(
                 height: 45,
                 child: RaisedButton(
-                  onPressed: () {
-                    if (formKey.currentState.validate()) {
-                      context.read<UserManager>().signIn(
-                          user: User(
-                            email: emailController.text,
-                            password: passController.text,
+                  onPressed: userManager.loading
+                      ? null
+                      : () {
+                          if (formKey.currentState.validate()) {
+                            userManager.signIn(
+                              user: User(
+                                email: emailController.text,
+                                password: passController.text,
+                              ),
+                              onFail: (e) {
+                                scaffoldKey.currentState.showSnackBar(
+                                  SnackBar(
+                                    content: Text('Falha ao entrar: $e'),
+                                    backgroundColor: Colors.red,
+                                  ),
+                                );
+                              },
+                              onSucess: () {
+                                print('sucesso!');
+                                //TODO: FECHAR TELA DE LOGIN!
+                              },
+                            );
+                          }
+                        },
+                  child: userManager.loading
+                      ? CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation(Colors.white),
+                        )
+                      : Text(
+                          'Entrar',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
                           ),
-                          onFail: (e) {
-                            print(e);
-                          });
-                    }
-                  },
-                  child: Text(
-                    'Entrar',
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white,
-                    ),
-                  ),
+                        ),
+                  disabledColor: Theme.of(context).accentColor.withAlpha(100),
                 ),
               ),
             ],
-          ),
-        ),
+          );
+        }),
       ),
     );
   }
