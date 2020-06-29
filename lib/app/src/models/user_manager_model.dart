@@ -13,10 +13,12 @@ class UserManager extends ChangeNotifier {
 
   final FirebaseAuth auth = FirebaseAuth.instance;
   final Firestore firestore = Firestore.instance;
-  FirebaseUser user;
+  User user;
 
   bool _loading = false;
   bool get loading => _loading;
+
+  bool get isLoggedIn => user != null;
 
   Future<void> signIn({User user, Function onFail, Function onSucess}) async {
     _loading = true;
@@ -25,7 +27,7 @@ class UserManager extends ChangeNotifier {
         email: user.email,
         password: user.password,
       );
-      this.user = result.user;
+      await _loadCurrentUser(firebaseUser: result.user);
 
       onSucess();
     } on PlatformException catch (e) {
@@ -44,6 +46,7 @@ class UserManager extends ChangeNotifier {
       );
 
       user.id = result.user.uid;
+      this.user = user;
       await user.saveData();
 
       onSucess();
@@ -54,16 +57,23 @@ class UserManager extends ChangeNotifier {
     _loading = false;
   }
 
+  void signOut() {
+    auth.signOut();
+    user = null;
+    notifyListeners();
+  }
+
   set loading(bool value) {
     _loading = value;
     notifyListeners();
   }
 
-  Future<void> _loadCurrentUser() async {
-    final FirebaseUser currentUser = await auth.currentUser();
+  Future<void> _loadCurrentUser({FirebaseUser firebaseUser}) async {
+    final FirebaseUser currentUser = firebaseUser ?? await auth.currentUser();
     if (currentUser != null) {
       final DocumentSnapshot docUser = await firestore.collection('users').document(currentUser.uid).get();
+      user = User.fromDocument(docUser);
+      notifyListeners();
     }
-    notifyListeners();
   }
 }

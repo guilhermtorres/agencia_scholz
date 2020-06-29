@@ -1,6 +1,7 @@
 import 'package:agencia_scholz/app/src/models/user_manager_model.dart';
 import 'package:agencia_scholz/app/src/views/home_views.dart';
 import 'package:agencia_scholz/app/src/views/create_login_views.dart';
+import 'package:agencia_scholz/app/src/views/login_views.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -9,6 +10,7 @@ class AgenciaScholzApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => UserManager(),
+      lazy: false,
       child: MaterialApp(
         initialRoute: '/home_views',
         onGenerateRoute: (settings) {
@@ -16,6 +18,10 @@ class AgenciaScholzApp extends StatelessWidget {
             case '/home_views':
               return MaterialPageRoute(
                 builder: (_) => HomeViews(),
+              );
+            case '/login':
+              return MaterialPageRoute(
+                builder: (_) => LoginViews(),
               );
             case '/create_login_views':
               return MaterialPageRoute(

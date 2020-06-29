@@ -135,8 +135,7 @@ class LoginViews extends StatelessWidget {
                                 );
                               },
                               onSucess: () {
-                                debugPrint('sucesso!');
-                                //TODO: FECHAR TELA DE LOGIN!
+                                Navigator.of(context).pop();
                               },
                             );
                           }

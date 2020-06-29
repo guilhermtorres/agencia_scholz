@@ -1,5 +1,5 @@
+import 'package:agencia_scholz/app/src/components/custom_drawer_header_components.dart';
 import 'package:agencia_scholz/app/src/components/drawer_tile_components.dart';
-import 'package:agencia_scholz/app/src/views/login_views.dart';
 import 'package:flutter/material.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -31,60 +31,7 @@ class CustomDrawer extends StatelessWidget {
               const SizedBox(
                 height: 30,
               ),
-              Container(
-                height: 170,
-                child: Stack(
-                  children: <Widget>[
-                    Positioned(
-                      top: 8,
-                      left: 30,
-                      child: Image.asset(
-                        'assets/images/Logotipo-4.png',
-                        scale: 2,
-                        color: Colors.white,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    Positioned(
-                      left: 15,
-                      bottom: 0,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            'Olá,',
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 3,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => LoginViews(),
-                                ),
-                              );
-                            },
-                            child: Text(
-                              'Entre ou cadastre-se >',
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Theme.of(context).accentColor,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              CustomDrawerHeader(),
               const Divider(),
               const SizedBox(
                 height: 20,
