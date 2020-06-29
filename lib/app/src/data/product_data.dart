@@ -14,10 +14,10 @@ class ProductData {
 
   ProductData.fromDocument(DocumentSnapshot snapshot) {
     id = snapshot.documentID;
-    title = snapshot.data['title'];
-    description = snapshot.data['description'];
-    price = snapshot.data['price'] + 0.0;
-    images = snapshot.data['images'];
-    type = snapshot.data['type'];
+    title = snapshot.data['title'] as String;
+    description = snapshot.data['description'] as String;
+    price = snapshot.data['price'] + 0.0 as double;
+    images = snapshot.data['images'] as List<dynamic>;
+    type = snapshot.data['type'] as List<dynamic>;
   }
 }

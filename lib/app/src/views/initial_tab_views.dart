@@ -43,7 +43,7 @@ class HomeTab extends StatelessWidget {
             FutureBuilder<QuerySnapshot>(
               future: Firestore.instance.collection('ImagesHome').orderBy('pos').getDocuments(),
               builder: (context, snapshot) {
-                if (!snapshot.hasData)
+                if (!snapshot.hasData) {
                   return SliverToBoxAdapter(
                     child: Container(
                         height: 200,
@@ -52,7 +52,7 @@ class HomeTab extends StatelessWidget {
                           valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                         )),
                   );
-                else
+                } else {
                   return SliverStaggeredGrid.count(
                       crossAxisCount: 2,
                       mainAxisSpacing: 1,
@@ -60,18 +60,19 @@ class HomeTab extends StatelessWidget {
                       staggeredTiles: snapshot.data.documents.map(
                         (doc) {
                           return StaggeredTile.count(
-                            doc.data['x'],
-                            doc.data['y'],
+                            doc.data['x'] as int,
+                            doc.data['y'] as num,
                           );
                         },
                       ).toList(),
                       children: snapshot.data.documents.map((doc) {
                         return FadeInImage.memoryNetwork(
                           placeholder: kTransparentImage,
-                          image: doc.data['image'],
+                          image: doc.data['image'] as String,
                           fit: BoxFit.cover,
                         );
                       }).toList());
+                }
               },
             )
           ],

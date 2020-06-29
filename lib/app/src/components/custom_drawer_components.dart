@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class CustomDrawer extends StatelessWidget {
   final PageController pageController;
 
-  CustomDrawer(this.pageController);
+  const CustomDrawer(this.pageController);
   Widget _buildDrawerBack() => Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -21,13 +21,14 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      elevation: 5,
       child: Stack(
         children: <Widget>[
           _buildDrawerBack(),
           ListView(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             children: <Widget>[
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Container(
@@ -60,10 +61,17 @@ class CustomDrawer extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 3,
                           ),
                           GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => LoginViews(),
+                                ),
+                              );
+                            },
                             child: Text(
                               'Entre ou cadastre-se >',
                               style: TextStyle(
@@ -72,13 +80,6 @@ class CustomDrawer extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => LoginViews(),
-                                ),
-                              );
-                            },
                           ),
                         ],
                       ),
@@ -86,8 +87,8 @@ class CustomDrawer extends StatelessWidget {
                   ],
                 ),
               ),
-              Divider(),
-              SizedBox(
+              const Divider(),
+              const SizedBox(
                 height: 20,
               ),
               DrawerTile(Icons.home, 'Início', pageController, 0),
@@ -98,7 +99,6 @@ class CustomDrawer extends StatelessWidget {
           ),
         ],
       ),
-      elevation: 5,
     );
   }
 }

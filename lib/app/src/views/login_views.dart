@@ -15,7 +15,7 @@ class LoginViews extends StatelessWidget {
       key: scaffoldKey,
       appBar: AppBar(
         title: Container(
-          child: Text(
+          child: const Text(
             'Entrar',
           ),
         ),
@@ -42,7 +42,7 @@ class LoginViews extends StatelessWidget {
             padding: const EdgeInsets.only(left: 20, top: 40, right: 20),
             shrinkWrap: true,
             children: <Widget>[
-              SizedBox(
+              const SizedBox(
                 height: 50,
               ),
               Container(
@@ -51,7 +51,7 @@ class LoginViews extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 60,
               ),
               Card(
@@ -76,7 +76,7 @@ class LoginViews extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Card(
@@ -104,6 +104,7 @@ class LoginViews extends StatelessWidget {
                 alignment: Alignment.centerRight,
                 child: FlatButton(
                   onPressed: () {},
+                  padding: EdgeInsets.zero,
                   child: Text(
                     'Esqueci minha senha',
                     style: TextStyle(
@@ -112,10 +113,9 @@ class LoginViews extends StatelessWidget {
                     ),
                     textAlign: TextAlign.right,
                   ),
-                  padding: EdgeInsets.zero,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               SizedBox(
@@ -139,12 +139,13 @@ class LoginViews extends StatelessWidget {
                                 );
                               },
                               onSucess: () {
-                                print('sucesso!');
+                                debugPrint('sucesso!');
                                 //TODO: FECHAR TELA DE LOGIN!
                               },
                             );
                           }
                         },
+                  disabledColor: Theme.of(context).accentColor.withAlpha(100),
                   child: userManager.loading
                       ? CircularProgressIndicator(
                           valueColor: AlwaysStoppedAnimation(Colors.white),
@@ -156,7 +157,6 @@ class LoginViews extends StatelessWidget {
                             color: Colors.white,
                           ),
                         ),
-                  disabledColor: Theme.of(context).accentColor.withAlpha(100),
                 ),
               ),
             ],

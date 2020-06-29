@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 
 class ProductDetailView extends StatefulWidget {
   final ProductData product;
-  ProductDetailView(this.product);
+  const ProductDetailView(this.product);
 
   @override
+  // ignore: no_logic_in_create_state
   _ProductDetailViewState createState() => _ProductDetailViewState(product);
 }
 
@@ -31,7 +32,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
             aspectRatio: 0.9,
             child: Carousel(
               images: product.images.map((url) {
-                return NetworkImage(url);
+                return NetworkImage(url as String) as String;
               }).toList(),
               dotSize: 5,
               dotSpacing: 15,
@@ -42,7 +43,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
@@ -63,7 +64,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                   ),
                   maxLines: 3,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Text(
@@ -76,17 +77,25 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                 SizedBox(
                   height: 120,
                   child: GridView(
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 8,
+                      crossAxisSpacing: 8,
+                      childAspectRatio: 0.5,
+                    ),
                     children: product.type.map((typ) {
                       return GestureDetector(
                         onTap: () {
                           setState(() {
-                            type = typ;
+                            type = typ as String;
                           });
                         },
                         child: Container(
                           decoration: BoxDecoration(
                             color: typ == type ? Theme.of(context).primaryColor : Colors.transparent,
-                            borderRadius: BorderRadius.all(Radius.circular(4)),
+                            borderRadius: const BorderRadius.all(Radius.circular(4)),
                             border: Border.all(
                               color: Theme.of(context).primaryColor,
                               width: 2,
@@ -95,7 +104,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                           width: 100,
                           alignment: Alignment.center,
                           child: Text(
-                            typ,
+                            typ as String,
                             style: TextStyle(
                               color: typ == type ? Colors.white : Colors.black,
                               fontWeight: typ == type ? FontWeight.bold : FontWeight.w600,
@@ -104,17 +113,9 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                         ),
                       );
                     }).toList(),
-                    scrollDirection: Axis.horizontal,
-                    padding: EdgeInsets.symmetric(vertical: 4),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 8,
-                      crossAxisSpacing: 8,
-                      childAspectRatio: 0.5,
-                    ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 SizedBox(
@@ -130,7 +131,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Text(
@@ -141,7 +142,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Text(

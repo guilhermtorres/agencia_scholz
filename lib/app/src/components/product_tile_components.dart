@@ -6,7 +6,7 @@ class ProductTile extends StatelessWidget {
   final String tipo;
   final ProductData product;
 
-  ProductTile(this.tipo, this.product);
+  const ProductTile(this.tipo, this.product);
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -22,7 +22,7 @@ class ProductTile extends StatelessWidget {
                   AspectRatio(
                     aspectRatio: 0.8,
                     child: Image.network(
-                      product.images[0],
+                      product.images[0] as String,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -30,7 +30,7 @@ class ProductTile extends StatelessWidget {
                     child: FittedBox(
                       fit: BoxFit.fitHeight,
                       child: Container(
-                        padding: EdgeInsets.all(8),
+                        padding: const EdgeInsets.all(8),
                         child: Column(
                           children: <Widget>[
                             Text(
@@ -59,7 +59,7 @@ class ProductTile extends StatelessWidget {
                   Flexible(
                     flex: 1,
                     child: Image.network(
-                      product.images[0],
+                      product.images[0] as String,
                       fit: BoxFit.cover,
                       height: 250,
                     ),
@@ -69,7 +69,7 @@ class ProductTile extends StatelessWidget {
                     child: FittedBox(
                       fit: BoxFit.fitHeight,
                       child: Container(
-                        padding: EdgeInsets.all(25),
+                        padding: const EdgeInsets.all(25),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[

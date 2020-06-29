@@ -26,7 +26,7 @@ class CreateLoginViews extends StatelessWidget {
           padding: const EdgeInsets.only(left: 40, top: 40, right: 40),
           child: ListView(
             children: <Widget>[
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Container(
@@ -35,7 +35,7 @@ class CreateLoginViews extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
               Card(
@@ -52,9 +52,9 @@ class CreateLoginViews extends StatelessWidget {
                       ),
                     ),
                     validator: (name) {
-                      if (name.isEmpty)
+                      if (name.isEmpty) {
                         return 'Campo Obrigatório';
-                      else if (name.trim().split(' ').length <= 1) return 'Preencha seu nome completo!';
+                      } else if (name.trim().split(' ').length <= 1) return 'Preencha seu nome completo!';
                       return null;
                     },
                   ),
@@ -82,7 +82,7 @@ class CreateLoginViews extends StatelessWidget {
               //     ),
               //   ),
               // ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Card(
@@ -100,15 +100,15 @@ class CreateLoginViews extends StatelessWidget {
                     ),
                     keyboardType: TextInputType.emailAddress,
                     validator: (email) {
-                      if (email.isEmpty)
+                      if (email.isEmpty) {
                         return 'Campo Obrigatório!';
-                      else if (!emailValid(email)) return 'E-mail inválido!';
+                      } else if (!emailValid(email)) return 'E-mail inválido!';
                       return null;
                     },
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Card(
@@ -124,15 +124,15 @@ class CreateLoginViews extends StatelessWidget {
                       ),
                     ),
                     validator: (pass) {
-                      if (pass.isEmpty)
+                      if (pass.isEmpty) {
                         return 'Campo Obrigatório!';
-                      else if (pass.length < 6) return 'Senha muito curta!';
+                      } else if (pass.length < 6) return 'Senha muito curta!';
                       return null;
                     },
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Card(
@@ -148,15 +148,15 @@ class CreateLoginViews extends StatelessWidget {
                       ),
                     ),
                     validator: (pass) {
-                      if (pass.isEmpty)
+                      if (pass.isEmpty) {
                         return 'Campo Obrigatório!';
-                      else if (pass.length < 6) return 'Senha muito curta!';
+                      } else if (pass.length < 6) return 'Senha muito curta!';
                       return null;
                     },
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
               SizedBox(

@@ -23,7 +23,7 @@ class HomeViews extends StatelessWidget {
           Scaffold(
             appBar: AppBar(
               title: Container(
-                child: Text(
+                child: const Text(
                   'Produtos e Serviços',
                 ),
               ),

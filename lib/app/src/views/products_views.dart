@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class ProductView extends StatelessWidget {
   final DocumentSnapshot snapshot;
 
-  ProductView(this.snapshot);
+  const ProductView(this.snapshot);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class ProductView extends StatelessWidget {
         appBar: AppBar(
           title: Container(
             child: Text(
-              snapshot.data['title'],
+              snapshot.data['title'] as String,
             ),
           ),
           centerTitle: true,
@@ -39,16 +39,16 @@ class ProductView extends StatelessWidget {
         body: FutureBuilder<QuerySnapshot>(
           future: Firestore.instance.collection('products').document(snapshot.documentID).collection('items').getDocuments(),
           builder: (context, snapshot) {
-            if (!snapshot.hasData)
-              return Center(
+            if (!snapshot.hasData) {
+              return const Center(
                 child: CircularProgressIndicator(),
               );
-            else
+            } else {
               return TabBarView(
                 children: [
                   GridView.builder(
-                    padding: EdgeInsets.all(10),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    padding: const EdgeInsets.all(10),
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       mainAxisSpacing: 4,
                       crossAxisSpacing: 4,
@@ -65,7 +65,7 @@ class ProductView extends StatelessWidget {
                     itemCount: snapshot.data.documents.length,
                   ),
                   ListView.builder(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     itemCount: snapshot.data.documents.length,
                     itemBuilder: (context, index) {
                       return ProductTile(
@@ -78,6 +78,7 @@ class ProductView extends StatelessWidget {
                   )
                 ],
               );
+            }
           },
         ),
       ),

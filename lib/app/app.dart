@@ -56,8 +56,8 @@ class AgenciaScholzApp extends StatelessWidget {
           appBarTheme: AppBarTheme(
             elevation: 5,
             color: const Color(0xFF00d856),
-            iconTheme: IconThemeData(
-              color: const Color(0xFF8C35F1),
+            iconTheme: const IconThemeData(
+              color: Color(0xFF8C35F1),
             ),
             textTheme: ThemeData.light().textTheme.copyWith(
                   headline6: TextStyle(
