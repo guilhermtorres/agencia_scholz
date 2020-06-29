@@ -57,15 +57,13 @@ class ProductTile extends StatelessWidget {
             : Row(
                 children: <Widget>[
                   Flexible(
-                    flex: 1,
                     child: Image.network(
                       product.images[0] as String,
                       fit: BoxFit.cover,
-                      height: 250,
+                      height: 200,
                     ),
                   ),
                   Flexible(
-                    flex: 1,
                     child: FittedBox(
                       fit: BoxFit.fitHeight,
                       child: Container(
@@ -77,12 +75,10 @@ class ProductTile extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
-                                Container(
-                                  child: Text(
-                                    product.title,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                Text(
+                                  product.title,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ],
@@ -91,14 +87,12 @@ class ProductTile extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
-                                Container(
-                                  child: Text(
-                                    'R\$ ${product.price.toStringAsFixed(2)}',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Theme.of(context).accentColor,
-                                      fontSize: 18,
-                                    ),
+                                Text(
+                                  'R\$ ${product.price.toStringAsFixed(2)}',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Theme.of(context).accentColor,
+                                    fontSize: 18,
                                   ),
                                 ),
                               ],

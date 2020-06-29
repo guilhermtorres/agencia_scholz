@@ -14,10 +14,8 @@ class ProductView extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: Container(
-            child: Text(
-              snapshot.data['title'] as String,
-            ),
+          title: Text(
+            snapshot.data['title'] as String,
           ),
           centerTitle: true,
           bottom: TabBar(

@@ -38,13 +38,11 @@ class CustomDrawer extends StatelessWidget {
                     Positioned(
                       top: 8,
                       left: 30,
-                      child: Container(
-                        child: Image.asset(
-                          'assets/images/Logotipo-4.png',
-                          scale: 2,
-                          color: Colors.white,
-                          fit: BoxFit.cover,
-                        ),
+                      child: Image.asset(
+                        'assets/images/Logotipo-4.png',
+                        scale: 2,
+                        color: Colors.white,
+                        fit: BoxFit.cover,
                       ),
                     ),
                     Positioned(

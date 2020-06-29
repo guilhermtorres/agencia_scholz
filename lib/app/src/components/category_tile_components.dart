@@ -11,13 +11,11 @@ class CategoryTile extends StatelessWidget {
       elevation: 0.2,
       child: ListTile(
         contentPadding: const EdgeInsets.all(10),
-        leading: Container(
-          child: Card(
-            elevation: 5,
-            child: Image.network(
-              snapshot.data['icon'] as String,
-              scale: 5,
-            ),
+        leading: Card(
+          elevation: 5,
+          child: Image.network(
+            snapshot.data['icon'] as String,
+            scale: 5,
           ),
         ),
         title: Text(

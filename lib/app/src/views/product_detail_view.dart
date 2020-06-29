@@ -19,10 +19,8 @@ class _ProductDetailViewState extends State<ProductDetailView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Container(
-          child: Text(
-            product.title,
-          ),
+        title: Text(
+          product.title,
         ),
         centerTitle: true,
       ),
@@ -32,7 +30,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
             aspectRatio: 0.9,
             child: Carousel(
               images: product.images.map((url) {
-                return NetworkImage(url as String) as String;
+                return NetworkImage(url as String);
               }).toList(),
               dotSize: 5,
               dotSpacing: 15,

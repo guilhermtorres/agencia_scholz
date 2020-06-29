@@ -14,10 +14,8 @@ class LoginViews extends StatelessWidget {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        title: Container(
-          child: const Text(
-            'Entrar',
-          ),
+        title: const Text(
+          'Entrar',
         ),
         centerTitle: true,
         actions: <Widget>[
@@ -45,11 +43,9 @@ class LoginViews extends StatelessWidget {
               const SizedBox(
                 height: 50,
               ),
-              Container(
-                child: Image.asset(
-                  'assets/images/Logotipo-4.png',
-                  fit: BoxFit.cover,
-                ),
+              Image.asset(
+                'assets/images/Logotipo-4.png',
+                fit: BoxFit.cover,
               ),
               const SizedBox(
                 height: 60,

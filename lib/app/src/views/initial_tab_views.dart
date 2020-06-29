@@ -30,13 +30,11 @@ class HomeTab extends StatelessWidget {
               snap: true,
               elevation: 0,
               flexibleSpace: FlexibleSpaceBar(
-                title: Container(
-                  child: Image.asset(
-                    'assets/images/Logotipo-4.png',
-                    scale: 3,
-                    color: Colors.white,
-                    fit: BoxFit.cover,
-                  ),
+                title: Image.asset(
+                  'assets/images/Logotipo-4.png',
+                  scale: 3,
+                  color: Colors.white,
+                  fit: BoxFit.cover,
                 ),
               ),
             ),

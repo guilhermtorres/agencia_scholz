@@ -13,10 +13,8 @@ class CreateLoginViews extends StatelessWidget {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        title: Container(
-          child: const Text(
-            'Criar Conta',
-          ),
+        title: const Text(
+          'Criar Conta',
         ),
         centerTitle: true,
       ),
@@ -29,11 +27,9 @@ class CreateLoginViews extends StatelessWidget {
               const SizedBox(
                 height: 30,
               ),
-              Container(
-                child: Image.asset(
-                  'assets/images/Logotipo-4.png',
-                  fit: BoxFit.cover,
-                ),
+              Image.asset(
+                'assets/images/Logotipo-4.png',
+                fit: BoxFit.cover,
               ),
               const SizedBox(
                 height: 40,
