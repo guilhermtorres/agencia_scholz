@@ -1,6 +1,4 @@
-import 'package:agencia_scholz/app/src/components/custom_drawer_components.dart';
 import 'package:agencia_scholz/app/src/components/product_tile_components.dart';
-import 'package:agencia_scholz/app/src/data/product_data.dart';
 import 'package:agencia_scholz/app/src/models/product_manager_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
