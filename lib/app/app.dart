@@ -1,3 +1,4 @@
+import 'package:agencia_scholz/app/src/models/product_manager_model.dart';
 import 'package:agencia_scholz/app/src/models/user_manager_model.dart';
 import 'package:agencia_scholz/app/src/views/home_views.dart';
 import 'package:agencia_scholz/app/src/views/create_login_views.dart';
@@ -8,9 +9,17 @@ import 'package:provider/provider.dart';
 class AgenciaScholzApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => UserManager(),
-      lazy: false,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => UserManager(),
+          lazy: false,
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ProductManager(),
+          lazy: false,
+        )
+      ],
       child: MaterialApp(
         initialRoute: '/home_views',
         onGenerateRoute: (settings) {

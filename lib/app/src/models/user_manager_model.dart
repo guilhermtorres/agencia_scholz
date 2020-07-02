@@ -1,4 +1,4 @@
-import 'package:agencia_scholz/app/src/models/user_model.dart';
+import 'package:agencia_scholz/app/src/data/user_data.dart';
 import 'package:agencia_scholz/app/src/utils/firebase_erros_utils.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';

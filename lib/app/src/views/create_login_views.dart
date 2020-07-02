@@ -1,5 +1,5 @@
 import 'package:agencia_scholz/app/src/models/user_manager_model.dart';
-import 'package:agencia_scholz/app/src/models/user_model.dart';
+import 'package:agencia_scholz/app/src/data/user_data.dart';
 import 'package:agencia_scholz/app/src/utils/validators_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

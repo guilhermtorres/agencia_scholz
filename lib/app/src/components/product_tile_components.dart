@@ -14,11 +14,15 @@ class ProductTile extends StatelessWidget {
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProductDetailView(product)));
       },
       child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         child: tipo == 'grid'
             ? Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
+                  const SizedBox(
+                    height: 10,
+                  ),
                   AspectRatio(
                     aspectRatio: 0.8,
                     child: Image.network(
@@ -40,6 +44,14 @@ class ProductTile extends StatelessWidget {
                               ),
                             ),
                             Text(
+                              'A Partir de',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey[400],
+                                fontSize: 14,
+                              ),
+                            ),
+                            Text(
                               'R\$ ${product.price.toStringAsFixed(2)}',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -56,6 +68,9 @@ class ProductTile extends StatelessWidget {
               )
             : Row(
                 children: <Widget>[
+                  const SizedBox(
+                    width: 10,
+                  ),
                   Flexible(
                     child: Image.network(
                       product.images[0] as String,
@@ -82,6 +97,26 @@ class ProductTile extends StatelessWidget {
                                   ),
                                 ),
                               ],
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Text(
+                                  'A Partir de',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey[400],
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 5,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
