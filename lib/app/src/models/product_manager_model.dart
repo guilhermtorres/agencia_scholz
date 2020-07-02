@@ -12,9 +12,9 @@ class ProductManager extends ChangeNotifier {
   List<ProductData> allProducts = [];
 
   Future<void> loadAllProducts() async {
-    final QuerySnapshot snapProducts = await firestore.collection('products').getDocuments();
+    final QuerySnapshot snapProducts = await firestore.collection('products').document("Branding's").collection('items').getDocuments();
 
-    // allProducts = snapProducts.documents.map((d) => ProductData.fromDocument(d)).toList();
+    allProducts = snapProducts.documents.map((d) => ProductData.fromDocument(d)).toList();
 
     notifyListeners();
   }
