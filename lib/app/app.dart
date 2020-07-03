@@ -1,8 +1,10 @@
+import 'package:agencia_scholz/app/src/data/product_data.dart';
 import 'package:agencia_scholz/app/src/models/product_manager_model.dart';
 import 'package:agencia_scholz/app/src/models/user_manager_model.dart';
 import 'package:agencia_scholz/app/src/views/home_views.dart';
 import 'package:agencia_scholz/app/src/views/create_login_views.dart';
 import 'package:agencia_scholz/app/src/views/login_views.dart';
+import 'package:agencia_scholz/app/src/views/product_detail_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -31,6 +33,10 @@ class AgenciaScholzApp extends StatelessWidget {
             case '/login':
               return MaterialPageRoute(
                 builder: (_) => LoginViews(),
+              );
+            case '/product':
+              return MaterialPageRoute(
+                builder: (_) => ProductDetailView(settings.arguments as ProductData),
               );
             case '/create_login_views':
               return MaterialPageRoute(

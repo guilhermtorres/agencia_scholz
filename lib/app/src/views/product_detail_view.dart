@@ -53,6 +53,20 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                   ),
                   maxLines: 3,
                 ),
+                const SizedBox(
+                  height: 15,
+                ),
+                Text(
+                  'A Partir de',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey[400],
+                    fontSize: 14,
+                  ),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
                 Text(
                   'R\$ ${product.price.toStringAsFixed(2)}',
                   style: TextStyle(

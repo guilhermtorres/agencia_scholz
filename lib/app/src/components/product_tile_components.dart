@@ -1,5 +1,4 @@
 import 'package:agencia_scholz/app/src/data/product_data.dart';
-import 'package:agencia_scholz/app/src/views/product_detail_view.dart';
 import 'package:flutter/material.dart';
 
 class ProductTile extends StatelessWidget {
@@ -11,7 +10,7 @@ class ProductTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProductDetailView(product)));
+        Navigator.of(context).pushNamed('/product', arguments: product);
       },
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
