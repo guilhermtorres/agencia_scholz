@@ -1,4 +1,5 @@
 import 'package:agencia_scholz/app/src/components/product_tile_components.dart';
+import 'package:agencia_scholz/app/src/components/search_dialog_components.dart';
 import 'package:agencia_scholz/app/src/models/product_manager_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -15,10 +16,56 @@ class ProductView extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
-            snapshot.data['title'] as String,
-          ),
+          title: Consumer<ProductManager>(builder: (_, productManager, __) {
+            if (productManager.search.isEmpty) {
+              return Text(
+                snapshot.data['title'] as String,
+              );
+            } else {
+              return LayoutBuilder(builder: (_, constraints) {
+                return GestureDetector(
+                  onTap: () async {
+                    final search = await showDialog<String>(context: context, builder: (_) => SearchDialog(productManager.search));
+                    if (search != null) {
+                      productManager.search = search;
+                    }
+                  },
+                  child: Container(
+                    width: constraints.biggest.width,
+                    child: Text(
+                      productManager.search,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                );
+              });
+            }
+          }),
           centerTitle: true,
+          actions: <Widget>[
+            Consumer<ProductManager>(
+              builder: (_, productManager, __) {
+                if (productManager.search.isEmpty) {
+                  return IconButton(
+                    icon: Icon(Icons.search),
+                    onPressed: () async {
+                      final search = await showDialog<String>(context: context, builder: (_) => SearchDialog(productManager.search));
+                      if (search != null) {
+                        productManager.search = search;
+                      }
+                    },
+                  );
+                } else {
+                  return IconButton(
+                    icon: Icon(Icons.close),
+                    onPressed: () async {
+                      productManager.search = '';
+                    },
+                  );
+                }
+              },
+            )
+          ],
           bottom: TabBar(
             tabs: <Widget>[
               Tab(
@@ -37,6 +84,7 @@ class ProductView extends StatelessWidget {
         ),
         body: Consumer<ProductManager>(
           builder: (_, productManager, __) {
+            final filteredProducts = productManager.filteredProducts;
             return TabBarView(
               children: [
                 GridView.builder(
@@ -50,18 +98,18 @@ class ProductView extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return ProductTile(
                       'grid',
-                      productManager.allProducts[index],
+                      productManager.filteredProducts[index],
                     );
                   },
-                  itemCount: productManager.allProducts.length,
+                  itemCount: productManager.filteredProducts.length,
                 ),
                 ListView.builder(
                   padding: const EdgeInsets.all(10),
-                  itemCount: productManager.allProducts.length,
+                  itemCount: productManager.filteredProducts.length,
                   itemBuilder: (context, index) {
                     return ProductTile(
                       'list',
-                      productManager.allProducts[index],
+                      productManager.filteredProducts[index],
                     );
                   },
                 )
