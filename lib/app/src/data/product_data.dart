@@ -1,7 +1,8 @@
 import 'package:agencia_scholz/app/src/models/item_size_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 
-class ProductData {
+class ProductData extends ChangeNotifier {
   String category;
   String id;
 
@@ -12,7 +13,15 @@ class ProductData {
 
   List images;
   List type;
-  List sizes;
+  List<ItemSize> sizes;
+
+  ItemSize _selectedSize;
+  ItemSize get selectedSize => _selectedSize;
+
+  set selectedSize(ItemSize value) {
+    _selectedSize = value;
+    notifyListeners();
+  }
 
   ProductData.fromDocument(DocumentSnapshot snapshot) {
     id = snapshot.documentID;
