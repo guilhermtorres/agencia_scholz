@@ -32,7 +32,7 @@ class CartTile extends StatelessWidget {
                     Text(
                       cartProduct.product.title,
                       style: TextStyle(
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.bold,
                         fontSize: 20,
                       ),
                     ),
@@ -41,15 +41,16 @@ class CartTile extends StatelessWidget {
                       child: Text(
                         'Tamanho: ${cartProduct.size}',
                         style: TextStyle(
-                          fontWeight: FontWeight.w300,
-                          fontSize: 20,
+                          color: Colors.grey,
+                          fontWeight: FontWeight.w100,
+                          fontSize: 16,
                         ),
                       ),
                     ),
                     Text(
                       'R\$ ${cartProduct.unitPrice.toStringAsFixed(2)}',
                       style: TextStyle(
-                        color: Theme.of(context).primaryColor,
+                        color: Theme.of(context).accentColor,
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
                       ),
