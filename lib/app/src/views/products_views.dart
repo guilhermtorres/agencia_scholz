@@ -117,6 +117,14 @@ class ProductView extends StatelessWidget {
             );
           },
         ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Theme.of(context).primaryColor,
+          foregroundColor: Colors.white,
+          onPressed: () {
+            Navigator.of(context).pushNamed('/cart');
+          },
+          child: Icon(Icons.shopping_cart),
+        ),
       ),
     );
   }
