@@ -1,5 +1,6 @@
 import 'package:agencia_scholz/app/src/components/size_widget_components.dart';
 import 'package:agencia_scholz/app/src/data/product_data.dart';
+import 'package:agencia_scholz/app/src/models/cart_product_manager_model.dart';
 import 'package:agencia_scholz/app/src/models/user_manager_model.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
@@ -116,7 +117,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                           onPressed: productData.selectedSize != null
                               ? () {
                                   if (userManager.isLoggedIn) {
-                                    //TODO: ADICIONAR AO CARRINHO
+                                    context.read<CartManager>().addToCart(product);
                                   } else {
                                     Navigator.of(context).pushNamed('/login');
                                   }
