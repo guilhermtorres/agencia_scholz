@@ -32,4 +32,15 @@ class ProductData extends ChangeNotifier {
     type = snapshot.data['type'] as List<dynamic>;
     sizes = (snapshot.data['sizes'] as List<dynamic> ?? []).map((s) => ItemSize.fromMap(s as Map<String, dynamic>)).toList();
   }
+  int get totalStock {
+    int stock = 0;
+    for (final size in sizes) {
+      stock += size.stock;
+    }
+    return stock;
+  }
+
+  bool get hasStock {
+    return totalStock > 0;
+  }
 }

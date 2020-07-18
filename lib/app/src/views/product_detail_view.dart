@@ -1,5 +1,6 @@
 import 'package:agencia_scholz/app/src/components/size_widget_components.dart';
 import 'package:agencia_scholz/app/src/data/product_data.dart';
+import 'package:agencia_scholz/app/src/models/user_manager_model.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -107,19 +108,30 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                   const SizedBox(
                     height: 25,
                   ),
-                  SizedBox(
-                    height: 45,
-                    child: RaisedButton(
-                      onPressed: type != null ? () {} : null,
-                      child: Text(
-                        'Adicionar ao Carrinho',
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
+                  if (product.hasStock)
+                    Consumer2<UserManager, ProductData>(builder: (_, userManager, productData, __) {
+                      return SizedBox(
+                        height: 45,
+                        child: RaisedButton(
+                          onPressed: productData.selectedSize != null
+                              ? () {
+                                  if (userManager.isLoggedIn) {
+                                    //TODO: ADICIONAR AO CARRINHO
+                                  } else {
+                                    Navigator.of(context).pushNamed('/login');
+                                  }
+                                }
+                              : null,
+                          child: Text(
+                            userManager.isLoggedIn ? 'Adicionar ao Carrinho' : 'Entre para Comprar',
+                            style: const TextStyle(
+                              fontSize: 20,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
+                      );
+                    }),
                   const SizedBox(
                     height: 20,
                   ),
