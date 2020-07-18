@@ -21,7 +21,7 @@ class PriceCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Text(
+            const Text(
               'Resumo do Pedido',
               textAlign: TextAlign.start,
               style: TextStyle(
@@ -51,7 +51,7 @@ class PriceCard extends StatelessWidget {
                 const Text(
                   'Valor da Entrega',
                 ),
-                Text('R\$ 5.83'),
+                const Text('R\$ 5.83'),
               ],
             ),
             const Divider(),
