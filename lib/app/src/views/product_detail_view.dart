@@ -118,6 +118,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                               ? () {
                                   if (userManager.isLoggedIn) {
                                     context.read<CartManager>().addToCart(product);
+                                    Navigator.of(context).pushNamed('/cart');
                                   } else {
                                     Navigator.of(context).pushNamed('/login');
                                   }

@@ -1,4 +1,5 @@
 import 'package:agencia_scholz/app/src/data/product_data.dart';
+import 'package:agencia_scholz/app/src/models/item_size_model.dart';
 
 class CartProduct {
   CartProduct.fromProduct(this.product) {
@@ -12,4 +13,14 @@ class CartProduct {
   String size;
 
   ProductData product;
+
+  ItemSize get itemSize {
+    if (product == null) return null;
+    return product.findSize(size);
+  }
+
+  num get unitPrice {
+    if (product == null) return 0;
+    return itemSize?.price ?? 0;
+  }
 }
