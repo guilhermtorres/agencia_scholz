@@ -1,6 +1,9 @@
+import 'package:agencia_scholz/app/src/components/section_list_components.dart';
+import 'package:agencia_scholz/app/src/models/home_manager_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class HomeTab extends StatelessWidget {
@@ -45,39 +48,21 @@ class HomeTab extends StatelessWidget {
                 )
               ],
             ),
-            FutureBuilder<QuerySnapshot>(
-              future: Firestore.instance.collection('ImagesHome').orderBy('pos').getDocuments(),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  return SliverToBoxAdapter(
-                    child: Container(
-                        height: 200,
-                        alignment: Alignment.center,
-                        child: CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                        )),
-                  );
-                } else {
-                  return SliverStaggeredGrid.count(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 1,
-                      crossAxisSpacing: 1,
-                      staggeredTiles: snapshot.data.documents.map(
-                        (doc) {
-                          return StaggeredTile.count(
-                            doc.data['x'] as int,
-                            doc.data['y'] as num,
-                          );
-                        },
-                      ).toList(),
-                      children: snapshot.data.documents.map((doc) {
-                        return FadeInImage.memoryNetwork(
-                          placeholder: kTransparentImage,
-                          image: doc.data['image'] as String,
-                          fit: BoxFit.cover,
-                        );
-                      }).toList());
-                }
+            Consumer<HomeManager>(
+              builder: (_, homeManager, __) {
+                final List<Widget> children = homeManager.sections.map<Widget>((section) {
+                  switch (section.type) {
+                    case 'List':
+                      return SectionList(section);
+                    case 'Staggered':
+                      return Container();
+                    default:
+                      return Container();
+                  }
+                }).toList();
+                return SliverList(
+                  delegate: SliverChildListDelegate(children),
+                );
               },
             )
           ],

@@ -1,7 +1,8 @@
 import 'package:agencia_scholz/app/src/data/section_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/widgets.dart';
 
-class HomeManager {
+class HomeManager extends ChangeNotifier {
   HomeManager() {
     _loadSections();
   }
@@ -17,6 +18,7 @@ class HomeManager {
         for (final DocumentSnapshot document in snapshot.documents) {
           sections.add(Section.fromDocument(document));
         }
+        notifyListeners();
       },
     );
   }

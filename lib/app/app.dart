@@ -24,7 +24,7 @@ class AgenciaScholzApp extends StatelessWidget {
           create: (_) => ProductManager(),
           lazy: false,
         ),
-        Provider(
+        ChangeNotifierProvider(
           create: (_) => HomeManager(),
           lazy: false,
         ),
