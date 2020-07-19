@@ -1,11 +1,8 @@
 import 'package:agencia_scholz/app/src/components/section_list_components.dart';
 import 'package:agencia_scholz/app/src/components/section_staggered_components.dart';
 import 'package:agencia_scholz/app/src/models/home_manager_model.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 class HomeTab extends StatelessWidget {
   @override
