@@ -1,6 +1,7 @@
 import 'package:agencia_scholz/app/src/components/custom_drawer_components.dart';
 import 'package:agencia_scholz/app/src/models/page_manager_model.dart';
 import 'package:agencia_scholz/app/src/models/user_manager_model.dart';
+import 'package:agencia_scholz/app/src/views/admin_users_views.dart';
 import 'package:agencia_scholz/app/src/views/initial_tab_views.dart';
 import 'package:agencia_scholz/app/src/views/products_tab_views.dart';
 import 'package:flutter/material.dart';
@@ -54,16 +55,7 @@ class HomeViews extends StatelessWidget {
                 body: Container(),
               ),
               if (userManager.adminEnabled) ...[
-                Scaffold(
-                  appBar: AppBar(
-                    title: const Text(
-                      'Usuários',
-                    ),
-                    centerTitle: true,
-                  ),
-                  drawer: const CustomDrawer(),
-                  body: Container(),
-                ),
+                AdminUsersViews(),
                 Scaffold(
                   appBar: AppBar(
                     title: const Text(
