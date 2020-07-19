@@ -5,10 +5,10 @@ import 'package:provider/provider.dart';
 class DrawerTile extends StatelessWidget {
   final IconData icon;
   final String text;
-  final PageController controller;
+
   final int page;
 
-  const DrawerTile(this.icon, this.text, this.controller, this.page);
+  const DrawerTile({this.icon, this.text, this.page});
 
   @override
   Widget build(BuildContext context) {

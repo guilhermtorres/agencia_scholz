@@ -1,3 +1,4 @@
+import 'package:agencia_scholz/app/src/models/page_manager_model.dart';
 import 'package:agencia_scholz/app/src/models/user_manager_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -43,6 +44,7 @@ class CustomDrawerHeader extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         if (userManager.isLoggedIn) {
+                          context.read<PageManager>().setPage(0);
                           userManager.signOut();
                         } else {
                           Navigator.of(context).pushNamed('/login');
