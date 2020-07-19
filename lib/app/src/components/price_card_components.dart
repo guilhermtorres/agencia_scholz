@@ -51,7 +51,7 @@ class PriceCard extends StatelessWidget {
                 const Text(
                   'Valor da Entrega',
                 ),
-                const Text('R\$ 5.83'),
+                Text('R\$ ${productsPrice.toStringAsFixed(2)}')
               ],
             ),
             const Divider(),

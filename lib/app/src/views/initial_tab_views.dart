@@ -37,6 +37,13 @@ class HomeTab extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
+              actions: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.shopping_cart),
+                  color: Colors.white,
+                  onPressed: () => Navigator.of(context).pushNamed('/cart'),
+                )
+              ],
             ),
             FutureBuilder<QuerySnapshot>(
               future: Firestore.instance.collection('ImagesHome').orderBy('pos').getDocuments(),
