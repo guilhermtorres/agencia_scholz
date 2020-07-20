@@ -5,6 +5,7 @@ import 'package:agencia_scholz/app/src/models/home_manager_model.dart';
 import 'package:agencia_scholz/app/src/models/product_manager_model.dart';
 import 'package:agencia_scholz/app/src/models/user_manager_model.dart';
 import 'package:agencia_scholz/app/src/views/cart_views.dart';
+import 'package:agencia_scholz/app/src/views/edit_product_detail_view.dart';
 import 'package:agencia_scholz/app/src/views/home_views.dart';
 import 'package:agencia_scholz/app/src/views/create_login_views.dart';
 import 'package:agencia_scholz/app/src/views/login_views.dart';
@@ -52,6 +53,10 @@ class AgenciaScholzApp extends StatelessWidget {
               return MaterialPageRoute(
                 builder: (_) => LoginViews(),
               );
+            case '/edit_product':
+              return MaterialPageRoute(
+                builder: (_) => EditProductView(settings.arguments as ProductData),
+              );
             case '/product':
               return MaterialPageRoute(
                 builder: (_) => ProductDetailView(settings.arguments as ProductData),
@@ -85,12 +90,12 @@ class AgenciaScholzApp extends StatelessWidget {
           fontFamily: 'Raleway',
           canvasColor: Colors.white,
           textTheme: ThemeData.light().textTheme.copyWith(
-                bodyText2: TextStyle(
+                bodyText2: const TextStyle(
                   fontFamily: 'Raleway',
                   color: Colors.black,
                   fontSize: 16,
                 ),
-                headline6: TextStyle(
+                headline6: const TextStyle(
                   fontFamily: 'Raleway',
                   color: Colors.black,
                   fontSize: 24,

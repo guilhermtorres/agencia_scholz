@@ -29,6 +29,27 @@ class _ProductDetailViewState extends State<ProductDetailView> {
             product.title,
           ),
           centerTitle: true,
+          actions: <Widget>[
+            Consumer<UserManager>(
+              builder: (_, userManager, __) {
+                if (userManager.adminEnabled) {
+                  return IconButton(
+                    icon: Icon(
+                      Icons.edit,
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pushReplacementNamed(
+                        '/edit_product',
+                        arguments: product,
+                      );
+                    },
+                  );
+                } else {
+                  return Container();
+                }
+              },
+            )
+          ],
         ),
         body: ListView(
           children: <Widget>[
@@ -74,7 +95,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                     height: 5,
                   ),
                   Text(
-                    'R\$ ${product.price.toStringAsFixed(2)}',
+                    'R\$ ${product.basePrice.toStringAsFixed(2)}',
                     style: TextStyle(
                       fontSize: 28,
                       color: Colors.red,
