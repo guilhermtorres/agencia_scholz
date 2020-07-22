@@ -1,4 +1,5 @@
 import 'package:agencia_scholz/app/src/components/images_form_components.dart';
+import 'package:agencia_scholz/app/src/components/sizes_form_components.dart';
 import 'package:agencia_scholz/app/src/data/product_data.dart';
 import 'package:flutter/material.dart';
 
@@ -81,6 +82,10 @@ class EditProductView extends StatelessWidget {
                       return null;
                     },
                   ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  SizesForm(product),
                   const SizedBox(
                     height: 20,
                   ),
