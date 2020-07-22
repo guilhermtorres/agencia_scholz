@@ -13,33 +13,46 @@ class SizesForm extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Row(
-          children: <Widget>[
-            Expanded(
-              child: Text(
-                'Tamanhos',
-                style: TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            CustomIconButton(
-              iconData: Icons.add,
-              color: Theme.of(context).accentColor,
-            ),
-          ],
-        ),
         const SizedBox(
           height: 5,
         ),
         FormField<List<ItemSize>>(
-          initialValue: product.sizes,
+          initialValue: List.from(product.sizes),
           builder: (state) {
             return Column(
-              children: state.value.map((size) {
-                return EditItemSize(size: size);
-              }).toList(),
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        'Tamanhos',
+                        style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    CustomIconButton(
+                      iconData: Icons.add,
+                      color: Theme.of(context).accentColor,
+                      onTap: () {
+                        state.value.add(ItemSize());
+                        state.didChange(state.value);
+                      },
+                    ),
+                  ],
+                ),
+                Column(
+                  children: state.value.map((size) {
+                    return EditItemSize(
+                      size: size,
+                      onRemove: () {
+                        state.value.remove(size);
+                      },
+                    );
+                  }).toList(),
+                ),
+              ],
             );
           },
         ),

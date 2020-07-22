@@ -3,7 +3,9 @@ import 'package:agencia_scholz/app/src/models/item_size_model.dart';
 import 'package:flutter/material.dart';
 
 class EditItemSize extends StatelessWidget {
-  const EditItemSize({this.size});
+  const EditItemSize({this.size, this.onRemove});
+
+  final VoidCallback onRemove;
 
   final ItemSize size;
   @override
@@ -26,7 +28,7 @@ class EditItemSize extends StatelessWidget {
         Expanded(
           flex: 25,
           child: TextFormField(
-            initialValue: size.stock.toString(),
+            initialValue: size.stock?.toString(),
             decoration: const InputDecoration(
               labelText: 'Estoque',
               isDense: true,
@@ -40,7 +42,7 @@ class EditItemSize extends StatelessWidget {
         Expanded(
           flex: 50,
           child: TextFormField(
-            initialValue: size.price.toStringAsFixed(2),
+            initialValue: size.price?.toStringAsFixed(2),
             decoration: const InputDecoration(
               labelText: 'Preço',
               prefixText: 'R\$  ',
@@ -55,6 +57,7 @@ class EditItemSize extends StatelessWidget {
         CustomIconButton(
           iconData: Icons.remove,
           color: Colors.red,
+          onTap: onRemove,
         ),
         CustomIconButton(
           iconData: Icons.arrow_drop_up,
