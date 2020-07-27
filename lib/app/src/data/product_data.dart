@@ -1,6 +1,9 @@
+import 'dart:io';
 import 'package:agencia_scholz/app/src/models/item_size_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:uuid/uuid.dart';
 
 class ProductData extends ChangeNotifier {
   ProductData({this.id, this.title, this.category, this.description, this.images, this.sizes, this.type}) {
@@ -40,7 +43,9 @@ class ProductData extends ChangeNotifier {
   }
 
   final Firestore firestore = Firestore.instance;
+  final FirebaseStorage storage = FirebaseStorage.instance;
   DocumentReference get firestoreRef => firestore.document('sellerprod/$id');
+  StorageReference get storageRef => storage.ref().child('icones produtos e serviços').child('items').child('id');
 
   int get totalStock {
     int stock = 0;
@@ -89,6 +94,31 @@ class ProductData extends ChangeNotifier {
     } else {
       await firestoreRef.updateData(data);
     }
+    final List<String> updateImages = [];
+
+    for (final newImage in newImages) {
+      if (images.contains(newImage)) {
+        updateImages.add(newImage as String);
+      } else {
+        final StorageUploadTask task = storageRef.child(Uuid().v1()).putFile(newImage as File);
+        final StorageTaskSnapshot snapshot = await task.onComplete;
+        final String url = await snapshot.ref.getDownloadURL() as String;
+        updateImages.add(url);
+      }
+    }
+
+    for (final image in images) {
+      if (!newImages.contains(image)) {
+        try {
+          final ref = await storage.getReferenceFromUrl(image as String);
+          await ref.delete();
+        } catch (e) {
+          debugPrint('Falha ao deletar $image');
+        }
+      }
+    }
+
+    await firestoreRef.updateData({'images': updateImages});
   }
 
   ProductData clone() {
