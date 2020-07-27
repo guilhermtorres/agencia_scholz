@@ -17,7 +17,7 @@ class EditProductView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(editing ? 'Editar Anúncio' : 'Criar Anúncio'),
+        title: Text(editing ? 'Editar Produto' : 'Criar Produto'),
         centerTitle: true,
       ),
       body: Form(
@@ -35,6 +35,7 @@ class EditProductView extends StatelessWidget {
                       if (name.length < 6) return 'Título muito curto';
                       return null;
                     },
+                    onSaved: (title) => product.title = title,
                     initialValue: product.title,
                     decoration: const InputDecoration(
                       hintText: 'Título do Produto',
@@ -84,6 +85,7 @@ class EditProductView extends StatelessWidget {
                       }
                       return null;
                     },
+                    onSaved: (desc) => product.description = desc,
                   ),
                   const SizedBox(
                     height: 20,
@@ -97,7 +99,9 @@ class EditProductView extends StatelessWidget {
                     child: RaisedButton(
                       disabledColor: Theme.of(context).accentColor.withAlpha(100),
                       onPressed: () {
-                        if (formkey.currentState.validate()) {}
+                        if (formkey.currentState.validate()) {
+                          formkey.currentState.save();
+                        }
                       },
                       child: const Text(
                         'Salvar alterações',

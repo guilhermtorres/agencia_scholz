@@ -19,6 +19,8 @@ class ProductData extends ChangeNotifier {
   List type;
   List<ItemSize> sizes;
 
+  List<dynamic> newImages;
+
   ItemSize _selectedSize;
   ItemSize get selectedSize => _selectedSize;
 
