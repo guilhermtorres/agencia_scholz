@@ -4,9 +4,12 @@ import 'package:agencia_scholz/app/src/data/product_data.dart';
 import 'package:flutter/material.dart';
 
 class EditProductView extends StatelessWidget {
-  EditProductView(this.product);
+  EditProductView(ProductData p)
+      : editing = p != null,
+        product = p != null ? p.clone() : ProductData();
 
   final ProductData product;
+  final bool editing;
 
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
@@ -14,7 +17,7 @@ class EditProductView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Editar Anúncio'),
+        title: Text(editing ? 'Editar Anúncio' : 'Criar Anúncio'),
         centerTitle: true,
       ),
       body: Form(
@@ -92,6 +95,7 @@ class EditProductView extends StatelessWidget {
                   SizedBox(
                     height: 45,
                     child: RaisedButton(
+                      disabledColor: Theme.of(context).accentColor.withAlpha(100),
                       onPressed: () {
                         if (formkey.currentState.validate()) {}
                       },

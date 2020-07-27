@@ -3,6 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 
 class ProductData extends ChangeNotifier {
+  ProductData({this.id, this.title, this.category, this.description, this.images, this.sizes, this.type}) {
+    images = images ?? [];
+    sizes = sizes ?? [];
+  }
   String category;
   String id;
 
@@ -60,5 +64,15 @@ class ProductData extends ChangeNotifier {
     } catch (e) {
       return null;
     }
+  }
+
+  ProductData clone() {
+    return ProductData(
+      id: id,
+      title: title,
+      description: description,
+      images: List.from(images),
+      sizes: sizes.map((size) => size.clone()).toList(),
+    );
   }
 }

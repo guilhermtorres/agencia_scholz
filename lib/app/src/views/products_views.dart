@@ -1,6 +1,7 @@
 import 'package:agencia_scholz/app/src/components/product_tile_components.dart';
 import 'package:agencia_scholz/app/src/components/search_dialog_components.dart';
 import 'package:agencia_scholz/app/src/models/product_manager_model.dart';
+import 'package:agencia_scholz/app/src/models/user_manager_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -62,6 +63,24 @@ class ProductView extends StatelessWidget {
                       productManager.search = '';
                     },
                   );
+                }
+              },
+            ),
+            Consumer<UserManager>(
+              builder: (_, userManager, __) {
+                if (userManager.adminEnabled) {
+                  return IconButton(
+                    icon: Icon(
+                      Icons.add,
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pushReplacementNamed(
+                        '/edit_product',
+                      );
+                    },
+                  );
+                } else {
+                  return Container();
                 }
               },
             )
