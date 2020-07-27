@@ -38,6 +38,10 @@ class ProductData extends ChangeNotifier {
     type = snapshot.data['type'] as List<dynamic>;
     sizes = (snapshot.data['sizes'] as List<dynamic> ?? []).map((s) => ItemSize.fromMap(s as Map<String, dynamic>)).toList();
   }
+
+  final Firestore firestore = Firestore.instance;
+  DocumentReference get firestoreRef => firestore.document('sellerprod/$id');
+
   int get totalStock {
     int stock = 0;
     for (final size in sizes) {
@@ -65,6 +69,25 @@ class ProductData extends ChangeNotifier {
       return sizes.firstWhere((s) => s.name == title);
     } catch (e) {
       return null;
+    }
+  }
+
+  List<Map<String, dynamic>> exportSizeList() {
+    return sizes.map((size) => size.toMap()).toList();
+  }
+
+  Future<void> save() async {
+    final Map<String, dynamic> data = {
+      'title': title,
+      'description': description,
+      'sizes': exportSizeList(),
+    };
+
+    if (id == null) {
+      final doc = await firestore.collection('sellerprod').add(data);
+      id = doc.documentID;
+    } else {
+      await firestoreRef.updateData(data);
     }
   }
 

@@ -20,4 +20,12 @@ class ItemSize {
       stock: stock,
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'price': price,
+      'stock': stock,
+    };
+  }
 }

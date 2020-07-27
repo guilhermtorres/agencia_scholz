@@ -101,6 +101,7 @@ class EditProductView extends StatelessWidget {
                       onPressed: () {
                         if (formkey.currentState.validate()) {
                           formkey.currentState.save();
+                          product.save();
                         }
                       },
                       child: const Text(
