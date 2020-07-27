@@ -122,7 +122,7 @@ class ProductTile extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 Text(
-                                  'R\$ ${product.price.toStringAsFixed(2)}',
+                                  'R\$ ${product.basePrice.toStringAsFixed(2)}',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Theme.of(context).accentColor,
