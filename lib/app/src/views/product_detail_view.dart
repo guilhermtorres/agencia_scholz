@@ -26,7 +26,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            product.title,
+            product.name,
           ),
           centerTitle: true,
           actions: <Widget>[
@@ -73,7 +73,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   Text(
-                    product.title,
+                    product.name,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w700,

@@ -6,19 +6,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:uuid/uuid.dart';
 
 class ProductData extends ChangeNotifier {
-  ProductData({this.id, this.title, this.category, this.description, this.images, this.sizes, this.type}) {
+  ProductData({this.id, this.name, this.description, this.images, this.sizes, this.type}) {
     images = images ?? [];
     sizes = sizes ?? [];
   }
-  String category;
+
   String id;
 
-  String title;
+  String name;
   String description;
 
   double price;
 
-  List images;
+  List images = [];
   List type;
   List<ItemSize> sizes;
 
@@ -41,11 +41,10 @@ class ProductData extends ChangeNotifier {
 
   ProductData.fromDocument(DocumentSnapshot snapshot) {
     id = snapshot.documentID;
-    title = snapshot.data['name'] as String;
+    name = snapshot.data['name'] as String;
     description = snapshot.data['description'] as String;
     price = snapshot.data['price'] as double;
     images = snapshot.data['images'] as List<dynamic>;
-    type = snapshot.data['type'] as List<dynamic>;
     sizes = (snapshot.data['sizes'] as List<dynamic> ?? []).map((s) => ItemSize.fromMap(s as Map<String, dynamic>)).toList();
   }
 
@@ -92,7 +91,7 @@ class ProductData extends ChangeNotifier {
     loading = true;
 
     final Map<String, dynamic> data = {
-      'title': title,
+      'name': name,
       'description': description,
       'sizes': exportSizeList(),
     };
@@ -136,7 +135,8 @@ class ProductData extends ChangeNotifier {
   ProductData clone() {
     return ProductData(
       id: id,
-      title: title,
+      name: name,
+      type: type,
       description: description,
       images: List.from(images),
       sizes: sizes.map((size) => size.clone()).toList(),

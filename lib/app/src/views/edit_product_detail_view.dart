@@ -39,8 +39,8 @@ class EditProductView extends StatelessWidget {
                         if (name.length < 6) return 'Título muito curto';
                         return null;
                       },
-                      onSaved: (title) => product.title = title,
-                      initialValue: product.title,
+                      onSaved: (name) => product.name = name,
+                      initialValue: product.name,
                       decoration: const InputDecoration(
                         hintText: 'Título do Produto',
                         border: InputBorder.none,

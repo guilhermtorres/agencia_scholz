@@ -37,7 +37,7 @@ class ProductTile extends StatelessWidget {
                         child: Column(
                           children: <Widget>[
                             Text(
-                              product.title,
+                              product.name,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                               ),
@@ -90,7 +90,7 @@ class ProductTile extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 Text(
-                                  product.title,
+                                  product.name,
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                   ),

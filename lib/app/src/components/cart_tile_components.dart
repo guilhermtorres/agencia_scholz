@@ -35,7 +35,7 @@ class CartTile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        cartProduct.product.title,
+                        cartProduct.product.name,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
