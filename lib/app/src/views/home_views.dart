@@ -3,13 +3,17 @@ import 'package:agencia_scholz/app/src/models/page_manager_model.dart';
 import 'package:agencia_scholz/app/src/models/user_manager_model.dart';
 import 'package:agencia_scholz/app/src/views/admin_users_views.dart';
 import 'package:agencia_scholz/app/src/views/initial_tab_views.dart';
-import 'package:agencia_scholz/app/src/views/products_tab_views.dart';
+
+import 'package:agencia_scholz/app/src/views/products_views.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class HomeViews extends StatelessWidget {
   final _pageController = PageController();
+  final DocumentSnapshot snapshot;
 
+  HomeViews(this.snapshot);
   @override
   Widget build(BuildContext context) {
     return Provider(
@@ -25,14 +29,8 @@ class HomeViews extends StatelessWidget {
                 drawer: const CustomDrawer(),
               ),
               Scaffold(
-                appBar: AppBar(
-                  title: const Text(
-                    'Produtos e Serviços',
-                  ),
-                  centerTitle: true,
-                ),
                 drawer: const CustomDrawer(),
-                body: ProductsTab(),
+                body: ProductView(snapshot),
               ),
               Scaffold(
                 appBar: AppBar(

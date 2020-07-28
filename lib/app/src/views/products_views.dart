@@ -1,3 +1,4 @@
+import 'package:agencia_scholz/app/src/components/custom_drawer_components.dart';
 import 'package:agencia_scholz/app/src/components/product_tile_components.dart';
 import 'package:agencia_scholz/app/src/components/search_dialog_components.dart';
 import 'package:agencia_scholz/app/src/models/product_manager_model.dart';
@@ -19,8 +20,8 @@ class ProductView extends StatelessWidget {
         appBar: AppBar(
           title: Consumer<ProductManager>(builder: (_, productManager, __) {
             if (productManager.search.isEmpty) {
-              return Text(
-                snapshot.data['title'] as String,
+              return const Text(
+                'Produtos',
               );
             } else {
               return LayoutBuilder(builder: (_, constraints) {
@@ -101,6 +102,7 @@ class ProductView extends StatelessWidget {
             indicatorColor: Theme.of(context).accentColor,
           ),
         ),
+        drawer: const CustomDrawer(),
         body: Consumer<ProductManager>(
           builder: (_, productManager, __) {
             // ignore: unused_local_variable
