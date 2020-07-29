@@ -1,6 +1,7 @@
 import 'package:agencia_scholz/app/src/components/section_list_components.dart';
 import 'package:agencia_scholz/app/src/components/section_staggered_components.dart';
 import 'package:agencia_scholz/app/src/models/home_manager_model.dart';
+import 'package:agencia_scholz/app/src/models/user_manager_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -43,7 +44,17 @@ class HomeTab extends StatelessWidget {
                   icon: Icon(Icons.shopping_cart),
                   color: Colors.white,
                   onPressed: () => Navigator.of(context).pushNamed('/cart'),
-                )
+                ),
+                Consumer<UserManager>(builder: (_, userManager, __) {
+                  if (userManager.adminEnabled) {
+                    return IconButton(
+                      icon: Icon(Icons.edit),
+                      onPressed: () {},
+                    );
+                  } else {
+                    return Container();
+                  }
+                })
               ],
             ),
             Consumer<HomeManager>(
