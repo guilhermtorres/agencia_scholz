@@ -45,12 +45,29 @@ class HomeTab extends StatelessWidget {
                   color: Colors.white,
                   onPressed: () => Navigator.of(context).pushNamed('/cart'),
                 ),
-                Consumer<UserManager>(builder: (_, userManager, __) {
+                Consumer2<UserManager, HomeManager>(builder: (_, userManager, homeManager, __) {
                   if (userManager.adminEnabled) {
-                    return IconButton(
-                      icon: Icon(Icons.edit),
-                      onPressed: () {},
-                    );
+                    if (homeManager.editing) {
+                      return PopupMenuButton(onSelected: (e) {
+                        if (e == 'Salvar') {
+                          homeManager.saveEditing();
+                        } else {
+                          homeManager.discardEditing();
+                        }
+                      }, itemBuilder: (_) {
+                        return ['Salvar', 'Descartar'].map((e) {
+                          return PopupMenuItem(
+                            value: e,
+                            child: Text(e),
+                          );
+                        }).toList();
+                      });
+                    } else {
+                      return IconButton(
+                        icon: Icon(Icons.edit),
+                        onPressed: homeManager.enterEditing,
+                      );
+                    }
                   } else {
                     return Container();
                   }
