@@ -1,3 +1,4 @@
+import 'package:agencia_scholz/app/src/components/add_section_widget_components.dart';
 import 'package:agencia_scholz/app/src/components/section_list_components.dart';
 import 'package:agencia_scholz/app/src/components/section_staggered_components.dart';
 import 'package:agencia_scholz/app/src/models/home_manager_model.dart';
@@ -76,16 +77,19 @@ class HomeTab extends StatelessWidget {
             ),
             Consumer<HomeManager>(
               builder: (_, homeManager, __) {
-                final List<Widget> children = homeManager.sections.map<Widget>((section) {
-                  switch (section.type) {
-                    case 'List':
-                      return SectionList(section);
-                    case 'Staggered':
-                      return SectionStaggered(section);
-                    default:
-                      return Container();
-                  }
-                }).toList();
+                final List<Widget> children = homeManager.sections.map<Widget>(
+                  (section) {
+                    switch (section.type) {
+                      case 'List':
+                        return SectionList(section);
+                      case 'Staggered':
+                        return SectionStaggered(section);
+                      default:
+                        return Container();
+                    }
+                  },
+                ).toList();
+                if (homeManager.editing) children.add(AddSectionWidget(homeManager));
                 return SliverList(
                   delegate: SliverChildListDelegate(children),
                 );
