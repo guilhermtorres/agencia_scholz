@@ -1,7 +1,8 @@
 import 'package:agencia_scholz/app/src/data/section_item_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/widgets.dart';
 
-class Section {
+class Section extends ChangeNotifier {
   Section({this.name, this.type, this.items}) {
     items = items ?? [];
   }
@@ -14,6 +15,11 @@ class Section {
   String name;
   String type;
   List<SectionItem> items;
+
+  void addItem(SectionItem item) {
+    items.add(item);
+    notifyListeners();
+  }
 
   Section clone() {
     return Section(

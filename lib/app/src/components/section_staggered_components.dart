@@ -36,7 +36,7 @@ class SectionStaggered extends StatelessWidget {
               if (index < section.items.length) {
                 return ItemTile(section.items[index]);
               } else {
-                return AddTileWidget();
+                return AddTileWidget(section);
               }
             },
             staggeredTileBuilder: (index) => StaggeredTile.count(2, index.isEven ? 2 : 1),
