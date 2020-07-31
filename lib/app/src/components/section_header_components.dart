@@ -13,31 +13,46 @@ class SectionHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final homeManager = context.watch<HomeManager>();
     if (homeManager.editing) {
-      return Row(
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Expanded(
-            child: TextFormField(
-              initialValue: section.name,
-              decoration: const InputDecoration(
-                hintText: 'Título',
-                isDense: true,
-                border: InputBorder.none,
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: TextFormField(
+                  initialValue: section.name,
+                  decoration: const InputDecoration(
+                    hintText: 'Título',
+                    isDense: true,
+                    border: InputBorder.none,
+                  ),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                  onChanged: (text) => section.name = text,
+                ),
               ),
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-              ),
-              onChanged: (text) => section.name = text,
-            ),
+              CustomIconButton(
+                iconData: Icons.remove,
+                color: Theme.of(context).accentColor,
+                onTap: () {
+                  homeManager.removeSection(section);
+                },
+              )
+            ],
           ),
-          CustomIconButton(
-            iconData: Icons.remove,
-            color: Theme.of(context).accentColor,
-            onTap: () {
-              homeManager.removeSection(section);
-            },
-          )
+          if (section.error != null)
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Text(
+                section.error,
+                style: TextStyle(
+                  color: Colors.red,
+                ),
+              ),
+            )
         ],
       );
     } else {
