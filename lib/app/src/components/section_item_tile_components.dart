@@ -30,7 +30,10 @@ class ItemTile extends StatelessWidget {
                 image: item.image as String,
                 fit: BoxFit.cover,
               )
-            : Image.file(item.image as File),
+            : Image.file(
+                item.image as File,
+                fit: BoxFit.cover,
+              ),
       ),
     );
   }
