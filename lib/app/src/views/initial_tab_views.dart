@@ -48,7 +48,7 @@ class HomeTab extends StatelessWidget {
                 ),
                 Consumer2<UserManager, HomeManager>(builder: (_, userManager, homeManager, __) {
                   if (userManager.adminEnabled) {
-                    if (homeManager.editing) {
+                    if (homeManager.editing && !homeManager.loading) {
                       return PopupMenuButton(onSelected: (e) {
                         if (e == 'Salvar') {
                           homeManager.saveEditing();
@@ -77,6 +77,16 @@ class HomeTab extends StatelessWidget {
             ),
             Consumer<HomeManager>(
               builder: (_, homeManager, __) {
+                if (homeManager.loading) {
+                  return SliverToBoxAdapter(
+                    child: LinearProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation(
+                        Theme.of(context).accentColor,
+                      ),
+                      backgroundColor: Colors.transparent,
+                    ),
+                  );
+                }
                 final List<Widget> children = homeManager.sections.map<Widget>(
                   (section) {
                     switch (section.type) {
