@@ -1,8 +1,12 @@
+import 'package:agencia_scholz/app/src/models/cart_product_manager_model.dart';
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class CepInputField extends StatelessWidget {
+  final TextEditingController cepController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -12,6 +16,7 @@ class CepInputField extends StatelessWidget {
           height: 10,
         ),
         TextFormField(
+          controller: cepController,
           decoration: InputDecoration(
             isDense: true,
             labelText: 'CEP',
@@ -41,7 +46,11 @@ class CepInputField extends StatelessWidget {
           height: 45,
           child: RaisedButton(
             disabledColor: Theme.of(context).accentColor.withAlpha(100),
-            onPressed: () {},
+            onPressed: () {
+              if (Form.of(context).validate()) {
+                context.read<CartManager>().getAddress(cepController.text);
+              }
+            },
             child: Text(
               'Buscar CEP',
               style: TextStyle(

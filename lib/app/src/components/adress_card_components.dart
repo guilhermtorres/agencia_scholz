@@ -11,16 +11,18 @@ class AdressCard extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.all(15),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              'Endereço de Entrega',
-              textAlign: TextAlign.start,
-              style: TextStyle(color: Theme.of(context).accentColor, fontWeight: FontWeight.bold, fontSize: 18),
-            ),
-            CepInputField(),
-          ],
+        child: Form(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                'Endereço de Entrega',
+                textAlign: TextAlign.start,
+                style: TextStyle(color: Theme.of(context).accentColor, fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+              CepInputField(),
+            ],
+          ),
         ),
       ),
     );
