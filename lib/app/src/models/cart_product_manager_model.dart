@@ -1,7 +1,7 @@
 import 'package:agencia_scholz/app/src/data/cart_product_data.dart';
 import 'package:agencia_scholz/app/src/data/product_data.dart';
 import 'package:agencia_scholz/app/src/data/user_data.dart';
-import 'package:agencia_scholz/app/src/models/cep_aberto_address_model.dart';
+import 'package:agencia_scholz/app/src/models/address_model.dart';
 import 'package:agencia_scholz/app/src/models/user_manager_model.dart';
 import 'package:agencia_scholz/app/src/utils/cep_aberto_utils.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -10,6 +10,7 @@ import 'package:flutter/widgets.dart';
 class CartManager extends ChangeNotifier {
   List<CartProduct> items = [];
   User user;
+  Address address;
   num productsPrice = 0.0;
   void updateUser(UserManager userManager) {
     user = userManager.user;
@@ -84,7 +85,20 @@ class CartManager extends ChangeNotifier {
     final cepAbertoUtils = CepAbertoUtils();
 
     try {
-      final address = await cepAbertoUtils.getAdressFromCep(cep);
+      final cepAbertoAddress = await cepAbertoUtils.getAdressFromCep(cep);
+
+      if (cepAbertoAddress != null) {
+        address = Address(
+          street: cepAbertoAddress.logradouro,
+          district: cepAbertoAddress.bairro,
+          zipCode: cepAbertoAddress.cep,
+          city: cepAbertoAddress.cidade.nome,
+          state: cepAbertoAddress.estado.sigla,
+          lat: cepAbertoAddress.latitude,
+          long: cepAbertoAddress.longitude,
+        );
+        notifyListeners();
+      }
     } catch (e) {
       debugPrint(e.toString());
     }
