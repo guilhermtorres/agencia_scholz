@@ -103,4 +103,9 @@ class CartManager extends ChangeNotifier {
       debugPrint(e.toString());
     }
   }
+
+  void removeAddress() {
+    address = null;
+    notifyListeners();
+  }
 }
