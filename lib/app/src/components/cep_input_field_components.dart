@@ -1,3 +1,4 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -21,8 +22,17 @@ class CepInputField extends StatelessWidget {
             ),
             border: InputBorder.none,
           ),
-          inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
+          inputFormatters: [
+            WhitelistingTextInputFormatter.digitsOnly,
+            CepInputFormatter(),
+          ],
           keyboardType: TextInputType.number,
+          validator: (cep) {
+            if (cep.isEmpty) {
+              return 'Campo Obrigatório';
+            } else if (cep.length != 10) return 'CEP Inválido';
+            return null;
+          },
         ),
         const SizedBox(
           height: 20,
