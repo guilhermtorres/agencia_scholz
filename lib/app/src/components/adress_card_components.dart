@@ -1,4 +1,6 @@
+import 'package:agencia_scholz/app/src/components/address_input_field_components.dart';
 import 'package:agencia_scholz/app/src/components/cep_input_field_components.dart';
+import 'package:agencia_scholz/app/src/models/address_model.dart';
 import 'package:agencia_scholz/app/src/models/cart_product_manager_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,6 +9,7 @@ class AdressCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 10,
       margin: const EdgeInsets.symmetric(
         horizontal: 16,
         vertical: 8,
@@ -15,7 +18,7 @@ class AdressCard extends StatelessWidget {
         padding: const EdgeInsets.all(15),
         child: Consumer<CartManager>(
           builder: (_, cartManager, __) {
-            final address = cartManager.address;
+            final address = cartManager.address ?? Address();
             return Form(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,6 +29,7 @@ class AdressCard extends StatelessWidget {
                     style: TextStyle(color: Theme.of(context).accentColor, fontWeight: FontWeight.bold, fontSize: 18),
                   ),
                   CepInputField(),
+                  if (address.zipCode != null) AddressInputField(address),
                 ],
               ),
             );
