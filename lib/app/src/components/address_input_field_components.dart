@@ -1,6 +1,8 @@
 import 'package:agencia_scholz/app/src/models/address_model.dart';
+import 'package:agencia_scholz/app/src/models/cart_product_manager_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class AddressInputField extends StatelessWidget {
   const AddressInputField(this.address);
@@ -114,7 +116,12 @@ class AddressInputField extends StatelessWidget {
           ),
           RaisedButton(
             disabledColor: Theme.of(context).accentColor.withAlpha(100),
-            onPressed: () {},
+            onPressed: () {
+              if (Form.of(context).validate()) {
+                Form.of(context).save();
+                context.read<CartManager>().setAddress(address);
+              }
+            },
             child: Text(
               'Calcular Frete',
               style: TextStyle(

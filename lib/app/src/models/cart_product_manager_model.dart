@@ -6,12 +6,14 @@ import 'package:agencia_scholz/app/src/models/user_manager_model.dart';
 import 'package:agencia_scholz/app/src/utils/cep_aberto_utils.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
+import 'package:geolocator/geolocator.dart';
 
 class CartManager extends ChangeNotifier {
   List<CartProduct> items = [];
   User user;
   Address address;
   num productsPrice = 0.0;
+  final Firestore firestore = Firestore.instance;
   void updateUser(UserManager userManager) {
     user = userManager.user;
     items.clear();
@@ -104,8 +106,29 @@ class CartManager extends ChangeNotifier {
     }
   }
 
+  void setAddress(Address address) {
+    this.address = address;
+    calculateDelivery(address.lat, address.long);
+  }
+
   void removeAddress() {
     address = null;
     notifyListeners();
+  }
+
+  Future<void> calculateDelivery(double lat, double long) async {
+    final DocumentSnapshot doc = await firestore.document('aux/delivery').get();
+
+    final latStore = doc.data['lat'] as double;
+    final longStore = doc.data['long'] as double;
+
+    final maxkm = doc.data['maxkm'] as num;
+
+    double dis = await Geolocator().distanceBetween(latStore, longStore, lat, long);
+
+    dis /= 1000.0;
+
+    if (dis <= maxkm) {
+    } else {}
   }
 }
