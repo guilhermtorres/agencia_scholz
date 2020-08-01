@@ -110,7 +110,7 @@ class EditProductView extends StatelessWidget {
                                       formkey.currentState.save();
                                       await product.save();
 
-                                      context.read<ProductManager>().update(productData);
+                                      context.read<ProductManager>().update(product);
 
                                       Navigator.of(context).pop();
                                     }
