@@ -20,7 +20,7 @@ class CategoryTile extends StatelessWidget {
         ),
         title: Text(
           snapshot.data['title'] as String,
-          style: TextStyle(
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
           ),
         ),

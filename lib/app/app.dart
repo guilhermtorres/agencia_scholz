@@ -121,7 +121,7 @@ class AgenciaScholzApp extends StatelessWidget {
               color: Color(0xFF8C35F1),
             ),
             textTheme: ThemeData.light().textTheme.copyWith(
-                  headline6: TextStyle(
+                  headline6: const TextStyle(
                     fontFamily: 'Raleway',
                     color: Colors.white,
                     fontWeight: FontWeight.w800,

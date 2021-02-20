@@ -35,7 +35,7 @@ class AddressInputField extends StatelessWidget {
                     labelText: 'Número',
                     hintText: '123',
                   ),
-                  inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   validator: emptyValidator,
                   onSaved: (t) => address.number = t,
                 ),
@@ -122,7 +122,7 @@ class AddressInputField extends StatelessWidget {
                 context.read<CartManager>().setAddress(address);
               }
             },
-            child: Text(
+            child: const Text(
               'Calcular Frete',
               style: TextStyle(
                 color: Colors.white,

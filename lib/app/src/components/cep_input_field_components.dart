@@ -22,7 +22,7 @@ class CepInputField extends StatelessWidget {
           ),
           TextFormField(
             controller: cepController,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               isDense: true,
               labelText: 'CEP',
               hintText: 'Insira aqui seu CEP ex:22.755-200',
@@ -33,7 +33,7 @@ class CepInputField extends StatelessWidget {
               border: InputBorder.none,
             ),
             inputFormatters: [
-              WhitelistingTextInputFormatter.digitsOnly,
+              FilteringTextInputFormatter.digitsOnly,
               CepInputFormatter(),
             ],
             keyboardType: TextInputType.number,
@@ -56,7 +56,7 @@ class CepInputField extends StatelessWidget {
                   context.read<CartManager>().getAddress(cepController.text);
                 }
               },
-              child: Text(
+              child: const Text(
                 'Buscar CEP',
                 style: TextStyle(
                   color: Colors.white,

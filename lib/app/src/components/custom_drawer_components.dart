@@ -9,10 +9,6 @@ class CustomDrawer extends StatelessWidget {
   Widget _buildDrawerBack() => Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              const Color(0xFF00d856),
-              Colors.white,
-            ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -36,22 +32,22 @@ class CustomDrawer extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              DrawerTile(
+              const DrawerTile(
                 icon: Icons.home,
                 text: 'Início',
                 page: 0,
               ),
-              DrawerTile(
+              const DrawerTile(
                 icon: Icons.list,
                 text: 'Produtos e Serviços',
                 page: 1,
               ),
-              DrawerTile(
+              const DrawerTile(
                 icon: Icons.playlist_add_check,
                 text: 'Meus Pedidos',
                 page: 2,
               ),
-              DrawerTile(
+              const DrawerTile(
                 icon: Icons.location_on,
                 text: 'Onde estamos',
                 page: 3,
@@ -59,14 +55,15 @@ class CustomDrawer extends StatelessWidget {
               Consumer<UserManager>(builder: (_, userManager, __) {
                 if (userManager.adminEnabled) {
                   return Column(
+                    // ignore: prefer_const_literals_to_create_immutables
                     children: <Widget>[
                       const Divider(),
-                      DrawerTile(
+                      const DrawerTile(
                         icon: Icons.supervised_user_circle,
                         text: 'Usuários',
                         page: 4,
                       ),
-                      DrawerTile(
+                      const DrawerTile(
                         icon: Icons.monetization_on,
                         text: 'Pedidos',
                         page: 5,

@@ -12,10 +12,6 @@ class HomeTab extends StatelessWidget {
     Widget _buildBodyBack() => Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [
-                const Color(0xFF00d856),
-                Colors.white,
-              ],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
             ),
@@ -42,7 +38,7 @@ class HomeTab extends StatelessWidget {
               ),
               actions: <Widget>[
                 IconButton(
-                  icon: Icon(Icons.shopping_cart),
+                  icon: const Icon(Icons.shopping_cart),
                   color: Colors.white,
                   onPressed: () => Navigator.of(context).pushNamed('/cart'),
                 ),
@@ -65,7 +61,7 @@ class HomeTab extends StatelessWidget {
                       });
                     } else {
                       return IconButton(
-                        icon: Icon(Icons.edit),
+                        icon: const Icon(Icons.edit),
                         onPressed: homeManager.enterEditing,
                       );
                     }
