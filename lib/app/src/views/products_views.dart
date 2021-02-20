@@ -49,7 +49,7 @@ class ProductView extends StatelessWidget {
               builder: (_, productManager, __) {
                 if (productManager.search.isEmpty) {
                   return IconButton(
-                    icon: Icon(Icons.search),
+                    icon: const Icon(Icons.search),
                     onPressed: () async {
                       final search = await showDialog<String>(context: context, builder: (_) => SearchDialog(productManager.search));
                       if (search != null) {
@@ -59,7 +59,7 @@ class ProductView extends StatelessWidget {
                   );
                 } else {
                   return IconButton(
-                    icon: Icon(Icons.close),
+                    icon: const Icon(Icons.close),
                     onPressed: () async {
                       productManager.search = '';
                     },
@@ -71,7 +71,7 @@ class ProductView extends StatelessWidget {
               builder: (_, userManager, __) {
                 if (userManager.adminEnabled) {
                   return IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.add,
                     ),
                     onPressed: () {
@@ -87,13 +87,14 @@ class ProductView extends StatelessWidget {
             )
           ],
           bottom: TabBar(
+            // ignore: prefer_const_literals_to_create_immutables
             tabs: <Widget>[
-              Tab(
+              const Tab(
                 icon: Icon(
                   Icons.grid_on,
                 ),
               ),
-              Tab(
+              const Tab(
                 icon: Icon(
                   Icons.list,
                 ),
@@ -145,7 +146,7 @@ class ProductView extends StatelessWidget {
           onPressed: () {
             Navigator.of(context).pushNamed('/cart');
           },
-          child: Icon(Icons.shopping_cart),
+          child: const Icon(Icons.shopping_cart),
         ),
       ),
     );

@@ -49,7 +49,7 @@ class ImagesForm extends StatelessWidget {
                         Align(
                           alignment: Alignment.topRight,
                           child: IconButton(
-                            icon: Icon(Icons.remove_circle_outline),
+                            icon: const Icon(Icons.remove_circle_outline),
                             color: Colors.red,
                             onPressed: () {
                               state.value.remove(image);
@@ -100,7 +100,7 @@ class ImagesForm extends StatelessWidget {
               if (state.hasError)
                 Text(
                   state.errorText,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.red,
                     fontSize: 14,
                   ),
