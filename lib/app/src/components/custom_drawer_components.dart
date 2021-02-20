@@ -7,8 +7,14 @@ import 'package:provider/provider.dart';
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer();
   Widget _buildDrawerBack() => Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
+            colors: [
+              // ignore: use_full_hex_values_for_flutter_colors
+              Color(0xfffee0000),
+              // ignore: use_full_hex_values_for_flutter_colors
+              Color(0xffeeee000),
+            ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),

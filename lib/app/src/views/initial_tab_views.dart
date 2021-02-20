@@ -10,8 +10,14 @@ class HomeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget _buildBodyBack() => Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
+              colors: [
+                // ignore: use_full_hex_values_for_flutter_colors
+                Color(0xfffee0000),
+                // ignore: use_full_hex_values_for_flutter_colors
+                Color(0XFFEEEE00),
+              ],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
             ),
