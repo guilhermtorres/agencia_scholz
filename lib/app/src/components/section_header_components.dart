@@ -26,7 +26,7 @@ class SectionHeader extends StatelessWidget {
                     isDense: true,
                     border: InputBorder.none,
                   ),
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
@@ -48,7 +48,7 @@ class SectionHeader extends StatelessWidget {
               padding: const EdgeInsets.all(10.0),
               child: Text(
                 section.error,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.red,
                 ),
               ),
@@ -58,7 +58,7 @@ class SectionHeader extends StatelessWidget {
     } else {
       return Text(
         section.name ?? '',
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.bold,
           fontSize: 20,

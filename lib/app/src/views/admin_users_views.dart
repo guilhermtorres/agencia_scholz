@@ -18,7 +18,7 @@ class AdminUsersViews extends StatelessWidget {
         builder: (_, adminUsersManager, __) {
           return AlphabetListScrollView(
             keyboardUsage: true,
-            highlightTextStyle: TextStyle(color: Colors.white, fontSize: 25),
+            highlightTextStyle: const TextStyle(color: Colors.white, fontSize: 25),
             showPreview: true,
             strList: adminUsersManager.names,
             indexedHeight: (index) => 80,
@@ -26,14 +26,14 @@ class AdminUsersViews extends StatelessWidget {
               return ListTile(
                 title: Text(
                   adminUsersManager.users[index].name,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 subtitle: Text(
                   adminUsersManager.users[index].email,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                   ),
                 ),

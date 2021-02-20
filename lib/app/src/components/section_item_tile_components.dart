@@ -47,7 +47,7 @@ class ItemTile extends StatelessWidget {
                             ),
                             subtitle: Text(
                               'R\$ ${product.basePrice.toStringAsFixed(2)}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.grey,
                               ),
                             ),
@@ -85,7 +85,7 @@ class ItemTile extends StatelessWidget {
                             Navigator.of(context).pop();
                           },
                           child: product != null
-                              ? Text(
+                              ? const Text(
                                   'Desvincular ao produto',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,

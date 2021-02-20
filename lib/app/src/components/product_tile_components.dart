@@ -17,7 +17,6 @@ class ProductTile extends StatelessWidget {
         child: tipo == 'grid'
             ? Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   const SizedBox(
                     height: 10,
@@ -38,7 +37,7 @@ class ProductTile extends StatelessWidget {
                           children: <Widget>[
                             Text(
                               product.name,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -87,11 +86,10 @@ class ProductTile extends StatelessWidget {
                           children: <Widget>[
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 Text(
                                   product.name,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -102,7 +100,6 @@ class ProductTile extends StatelessWidget {
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 Text(
                                   'A Partir de',
@@ -119,7 +116,6 @@ class ProductTile extends StatelessWidget {
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 Text(
                                   'R\$ ${product.basePrice.toStringAsFixed(2)}',

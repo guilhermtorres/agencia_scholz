@@ -44,7 +44,7 @@ class CreateLoginViews extends StatelessWidget {
                         onSaved: (name) => user.name = name,
                         enabled: !userManager.loading,
                         autocorrect: false,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           hintText: '   Nome Completo',
                           hintStyle: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -92,7 +92,7 @@ class CreateLoginViews extends StatelessWidget {
                         enabled: !userManager.loading,
                         onSaved: (email) => user.email = email,
                         autocorrect: false,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           hintText: '   E-mail',
                           hintStyle: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -118,7 +118,7 @@ class CreateLoginViews extends StatelessWidget {
                       child: TextFormField(
                         enabled: !userManager.loading,
                         onSaved: (pass) => user.password = pass,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           hintText: '   Senha',
                           hintStyle: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -143,7 +143,7 @@ class CreateLoginViews extends StatelessWidget {
                       child: TextFormField(
                         enabled: !userManager.loading,
                         onSaved: (pass) => user.confirmPassword = pass,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           hintText: '   Repita a Senha',
                           hintStyle: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -170,8 +170,8 @@ class CreateLoginViews extends StatelessWidget {
                               if (_formKey.currentState.validate()) {
                                 _formKey.currentState.save();
                                 if (user.password != user.confirmPassword) {
-                                  scaffoldKey.currentState.showSnackBar(SnackBar(
-                                    content: const Text('As senhas precisam ser iguais!'),
+                                  scaffoldKey.currentState.showSnackBar(const SnackBar(
+                                    content: Text('As senhas precisam ser iguais!'),
                                     backgroundColor: Colors.red,
                                   ));
                                   return;

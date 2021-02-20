@@ -23,7 +23,7 @@ class LoginViews extends StatelessWidget {
             onPressed: () {
               Navigator.of(context).pushReplacementNamed('/create_login_views');
             },
-            child: Text(
+            child: const Text(
               'Criar conta',
               style: TextStyle(
                 fontSize: 16,
@@ -58,7 +58,7 @@ class LoginViews extends StatelessWidget {
                     controller: emailController,
                     enabled: !userManager.loading,
                     autocorrect: false,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: '   E-mail',
                       hintStyle: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -82,7 +82,7 @@ class LoginViews extends StatelessWidget {
                   child: TextFormField(
                     controller: passController,
                     enabled: !userManager.loading,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: '   Senha',
                       hintStyle: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -142,10 +142,10 @@ class LoginViews extends StatelessWidget {
                         },
                   disabledColor: Theme.of(context).accentColor.withAlpha(100),
                   child: userManager.loading
-                      ? CircularProgressIndicator(
+                      ? const CircularProgressIndicator(
                           valueColor: AlwaysStoppedAnimation(Colors.white),
                         )
-                      : Text(
+                      : const Text(
                           'Entrar',
                           style: TextStyle(
                             fontSize: 20,

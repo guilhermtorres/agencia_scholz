@@ -45,7 +45,7 @@ class EditProductView extends StatelessWidget {
                         hintText: 'Título do Produto',
                         border: InputBorder.none,
                       ),
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
@@ -68,8 +68,8 @@ class EditProductView extends StatelessWidget {
                         color: Theme.of(context).accentColor,
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 16),
+                    const Padding(
+                      padding: EdgeInsets.only(top: 16),
                       child: Text(
                         'Descrição',
                         style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),

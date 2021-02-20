@@ -25,7 +25,7 @@ class SearchDialog extends StatelessWidget {
                   vertical: 15,
                 ),
                 prefixIcon: IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.arrow_back,
                   ),
                   onPressed: () {

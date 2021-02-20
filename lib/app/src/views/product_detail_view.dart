@@ -34,7 +34,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
               builder: (_, userManager, __) {
                 if (userManager.adminEnabled) {
                   return IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.edit,
                     ),
                     onPressed: () {
@@ -74,7 +74,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                 children: <Widget>[
                   Text(
                     product.name,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w700,
                     ),
@@ -96,7 +96,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                   ),
                   Text(
                     'R\$ ${product.basePrice.toStringAsFixed(2)}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 28,
                       color: Colors.red,
                       fontWeight: FontWeight.w700,
@@ -106,7 +106,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                   const SizedBox(
                     height: 20,
                   ),
-                  Text(
+                  const Text(
                     'Qual setor você atua?',
                     style: TextStyle(
                       fontSize: 15,
@@ -158,7 +158,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                   const SizedBox(
                     height: 20,
                   ),
-                  Text(
+                  const Text(
                     'O que inclui nosso serviço?',
                     style: TextStyle(
                       fontSize: 20,
@@ -171,7 +171,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                   ),
                   Text(
                     product.description,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                       color: Colors.black,
                     ),
