@@ -17,6 +17,7 @@ class AddressInputField extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             TextFormField(
+              enabled: !cartManager.loading,
               initialValue: address.street,
               decoration: const InputDecoration(
                 isDense: true,
@@ -30,6 +31,7 @@ class AddressInputField extends StatelessWidget {
               children: <Widget>[
                 Expanded(
                   child: TextFormField(
+                    enabled: !cartManager.loading,
                     initialValue: address.number,
                     decoration: const InputDecoration(
                       isDense: true,
@@ -47,6 +49,7 @@ class AddressInputField extends StatelessWidget {
                 Expanded(
                   flex: 3,
                   child: TextFormField(
+                    enabled: !cartManager.loading,
                     initialValue: address.complement,
                     decoration: const InputDecoration(
                       isDense: true,
@@ -59,6 +62,7 @@ class AddressInputField extends StatelessWidget {
               ],
             ),
             TextFormField(
+              enabled: !cartManager.loading,
               initialValue: address.district,
               decoration: const InputDecoration(
                 isDense: true,
@@ -73,6 +77,7 @@ class AddressInputField extends StatelessWidget {
                 Expanded(
                   flex: 3,
                   child: TextFormField(
+                    enabled: false,
                     initialValue: address.city,
                     decoration: const InputDecoration(
                       isDense: true,
@@ -115,23 +120,31 @@ class AddressInputField extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
+            if (cartManager.loading)
+              LinearProgressIndicator(
+                valueColor: AlwaysStoppedAnimation(Colors.greenAccent[400]),
+                backgroundColor: Colors.transparent,
+              ),
             RaisedButton(
               disabledColor: Theme.of(context).accentColor.withAlpha(100),
-              onPressed: () async {
-                if (Form.of(context).validate()) {
-                  Form.of(context).save();
-                  try {
-                    await context.read<CartManager>().setAddress(address);
-                  } catch (e) {
-                    Scaffold.of(context).showSnackBar(SnackBar(
-                      content: Text(
-                        "$e",
-                      ),
-                      backgroundColor: Colors.red,
-                    ));
-                  }
-                }
-              },
+              onPressed: !cartManager.loading
+                  ? () async {
+                      if (Form.of(context).validate()) {
+                        Form.of(context).save();
+                        try {
+                          await context.read<CartManager>().setAddress(address);
+                        } catch (e) {
+                          Scaffold.of(context).showSnackBar(SnackBar(
+                            content: Text(
+                              "$e",
+                              style: const TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            backgroundColor: Colors.red,
+                          ));
+                        }
+                      }
+                    }
+                  : null,
               child: const Text(
                 'Calcular Frete',
                 style: TextStyle(
