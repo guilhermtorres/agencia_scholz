@@ -9,138 +9,148 @@ class AddressInputField extends StatelessWidget {
   final Address address;
   @override
   Widget build(BuildContext context) {
+    final cartManager = context.watch<CartManager>();
     String emptyValidator(String text) => text.isEmpty ? 'Campo obrigatório' : null;
-
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          TextFormField(
-            initialValue: address.street,
-            decoration: const InputDecoration(
-              isDense: true,
-              labelText: 'Rua/Avenida',
-              hintText: 'Av. Brasil',
+    if (address.zipCode != null && cartManager.deliveryPrice == null) {
+      return SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            TextFormField(
+              initialValue: address.street,
+              decoration: const InputDecoration(
+                isDense: true,
+                labelText: 'Rua/Avenida',
+                hintText: 'Av. Brasil',
+              ),
+              validator: emptyValidator,
+              onSaved: (t) => address.street = t,
             ),
-            validator: emptyValidator,
-            onSaved: (t) => address.street = t,
-          ),
-          Row(
-            children: <Widget>[
-              Expanded(
-                child: TextFormField(
-                  initialValue: address.number,
-                  decoration: const InputDecoration(
-                    isDense: true,
-                    labelText: 'Número',
-                    hintText: '123',
-                  ),
-                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                  validator: emptyValidator,
-                  onSaved: (t) => address.number = t,
-                ),
-              ),
-              const SizedBox(
-                width: 50,
-              ),
-              Expanded(
-                flex: 3,
-                child: TextFormField(
-                  initialValue: address.complement,
-                  decoration: const InputDecoration(
-                    isDense: true,
-                    labelText: 'Complemento',
-                    hintText: 'Opcional',
-                  ),
-                  onSaved: (t) => address.complement = t,
-                ),
-              ),
-            ],
-          ),
-          TextFormField(
-            initialValue: address.district,
-            decoration: const InputDecoration(
-              isDense: true,
-              labelText: 'Bairro',
-              hintText: 'Copacabana',
-            ),
-            validator: emptyValidator,
-            onSaved: (t) => address.district = t,
-          ),
-          Row(
-            children: <Widget>[
-              Expanded(
-                flex: 3,
-                child: TextFormField(
-                  initialValue: address.city,
-                  decoration: const InputDecoration(
-                    isDense: true,
-                    labelText: 'Cidade',
-                    hintText: 'Rio de Janeiro',
-                  ),
-                  validator: emptyValidator,
-                  onSaved: (t) => address.city = t,
-                ),
-              ),
-              const SizedBox(
-                width: 50,
-              ),
-              Expanded(
-                child: TextFormField(
-                  autocorrect: false,
-                  enabled: false,
-                  textCapitalization: TextCapitalization.characters,
-                  initialValue: address.state,
-                  decoration: const InputDecoration(
-                    isDense: true,
-                    labelText: 'UF',
-                    hintText: 'RJ',
-                    counterText: '',
-                  ),
-                  maxLength: 2,
-                  validator: (e) {
-                    if (e.isEmpty) {
-                      return 'Campo Obrigatório';
-                    } else if (e.length != 2) {
-                      return 'Inválido';
-                    }
-                    return null;
-                  },
-                  onSaved: (t) => address.state = t,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          RaisedButton(
-            disabledColor: Theme.of(context).accentColor.withAlpha(100),
-            onPressed: () async {
-              if (Form.of(context).validate()) {
-                Form.of(context).save();
-                try {
-                  await context.read<CartManager>().setAddress(address);
-                } catch (e) {
-                  Scaffold.of(context).showSnackBar(SnackBar(
-                    content: Text(
-                      "$e",
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: TextFormField(
+                    initialValue: address.number,
+                    decoration: const InputDecoration(
+                      isDense: true,
+                      labelText: 'Número',
+                      hintText: '123',
                     ),
-                    backgroundColor: Colors.red,
-                  ));
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    validator: emptyValidator,
+                    onSaved: (t) => address.number = t,
+                  ),
+                ),
+                const SizedBox(
+                  width: 50,
+                ),
+                Expanded(
+                  flex: 3,
+                  child: TextFormField(
+                    initialValue: address.complement,
+                    decoration: const InputDecoration(
+                      isDense: true,
+                      labelText: 'Complemento',
+                      hintText: 'Opcional',
+                    ),
+                    onSaved: (t) => address.complement = t,
+                  ),
+                ),
+              ],
+            ),
+            TextFormField(
+              initialValue: address.district,
+              decoration: const InputDecoration(
+                isDense: true,
+                labelText: 'Bairro',
+                hintText: 'Copacabana',
+              ),
+              validator: emptyValidator,
+              onSaved: (t) => address.district = t,
+            ),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  flex: 3,
+                  child: TextFormField(
+                    initialValue: address.city,
+                    decoration: const InputDecoration(
+                      isDense: true,
+                      labelText: 'Cidade',
+                      hintText: 'Rio de Janeiro',
+                    ),
+                    validator: emptyValidator,
+                    onSaved: (t) => address.city = t,
+                  ),
+                ),
+                const SizedBox(
+                  width: 50,
+                ),
+                Expanded(
+                  child: TextFormField(
+                    autocorrect: false,
+                    enabled: false,
+                    textCapitalization: TextCapitalization.characters,
+                    initialValue: address.state,
+                    decoration: const InputDecoration(
+                      isDense: true,
+                      labelText: 'UF',
+                      hintText: 'RJ',
+                      counterText: '',
+                    ),
+                    maxLength: 2,
+                    validator: (e) {
+                      if (e.isEmpty) {
+                        return 'Campo Obrigatório';
+                      } else if (e.length != 2) {
+                        return 'Inválido';
+                      }
+                      return null;
+                    },
+                    onSaved: (t) => address.state = t,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            RaisedButton(
+              disabledColor: Theme.of(context).accentColor.withAlpha(100),
+              onPressed: () async {
+                if (Form.of(context).validate()) {
+                  Form.of(context).save();
+                  try {
+                    await context.read<CartManager>().setAddress(address);
+                  } catch (e) {
+                    Scaffold.of(context).showSnackBar(SnackBar(
+                      content: Text(
+                        "$e",
+                      ),
+                      backgroundColor: Colors.red,
+                    ));
+                  }
                 }
-              }
-            },
-            child: const Text(
-              'Calcular Frete',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
+              },
+              child: const Text(
+                'Calcular Frete',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                ),
               ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ),
+      );
+    } else if (address.zipCode != null) {
+      return Padding(
+        padding: const EdgeInsets.only(bottom: 16),
+        child: Text('${address.street}, ${address.number}\n${address.district}\n'
+            '${address.city} - ${address.state}'),
+      );
+    } else {
+      return Container();
+    }
   }
 }

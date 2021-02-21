@@ -29,7 +29,7 @@ class AdressCard extends StatelessWidget {
                     style: TextStyle(color: Theme.of(context).accentColor, fontWeight: FontWeight.bold, fontSize: 18),
                   ),
                   CepInputField(address),
-                  if (address.zipCode != null) AddressInputField(address),
+                  AddressInputField(address),
                 ],
               ),
             );
