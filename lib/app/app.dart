@@ -80,9 +80,7 @@ class AgenciaScholzApp extends StatelessWidget {
                 builder: (_) => ProductDetailView(settings.arguments as ProductData),
               );
             case '/cart':
-              return MaterialPageRoute(
-                builder: (_) => CartView(),
-              );
+              return MaterialPageRoute(builder: (_) => CartView(), settings: settings);
             case '/create_login_views':
               return MaterialPageRoute(
                 builder: (_) => CreateLoginViews(),

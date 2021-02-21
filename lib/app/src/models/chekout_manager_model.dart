@@ -11,8 +11,13 @@ class CheckoutManager extends ChangeNotifier {
     this.cartManager = cartManager;
   }
 
-  void checkout() {
-    _decrementStock();
+  void checkout({Function onStockFail}) async {
+    try {
+      await _decrementStock();
+    } catch (e) {
+      onStockFail(e);
+      debugPrint(e.toString());
+    }
     _getOrderId().then((value) => print(value));
   }
 
@@ -50,6 +55,8 @@ class CheckoutManager extends ChangeNotifier {
           final doc = await tx.get(firestore.document('products/${cartProduct.productId}'));
           product = ProductData.fromDocument(doc);
         }
+
+        cartProduct.product = product;
 
         final size = product.findSize(cartProduct.size);
         if (size.stock - cartProduct.quantity < 0) {

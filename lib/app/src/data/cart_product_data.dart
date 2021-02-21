@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 
 class CartProduct extends ChangeNotifier {
-  CartProduct.fromProduct(this.product) {
+  CartProduct.fromProduct(this._product) {
     productId = product.id;
     quantity = 1;
     size = product.selectedSize.name;
@@ -18,7 +18,6 @@ class CartProduct extends ChangeNotifier {
 
     firestore.document('sellerprod/$productId').get().then((doc) {
       product = ProductData.fromDocument(doc);
-      notifyListeners();
     });
   }
 
@@ -30,7 +29,12 @@ class CartProduct extends ChangeNotifier {
   int quantity;
   String size;
 
-  ProductData product;
+  ProductData _product;
+  ProductData get product => _product;
+  set product(ProductData value) {
+    _product = value;
+    notifyListeners();
+  }
 
   ItemSize get itemSize {
     if (product == null) return null;
