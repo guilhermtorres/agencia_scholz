@@ -25,7 +25,7 @@ class CepInputField extends StatelessWidget {
             decoration: const InputDecoration(
               isDense: true,
               labelText: 'CEP',
-              hintText: 'Insira aqui seu CEP ex:22.755-200',
+              hintText: 'Insira aqui seu CEP ex: 22.755-200',
               hintStyle: TextStyle(
                 color: Colors.black,
                 fontStyle: FontStyle.italic,
