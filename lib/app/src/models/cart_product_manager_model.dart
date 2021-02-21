@@ -27,10 +27,13 @@ class CartManager extends ChangeNotifier {
   final Firestore firestore = Firestore.instance;
   void updateUser(UserManager userManager) {
     user = userManager.user;
+    productsPrice = 0.0;
     items.clear();
+    removeAddress();
 
     if (user != null) {
       _loadCartItems();
+      _loadUserAddress();
     }
   }
 
@@ -38,6 +41,13 @@ class CartManager extends ChangeNotifier {
     final QuerySnapshot cartSnap = await user.cartReference.getDocuments();
 
     items = cartSnap.documents.map((d) => CartProduct.fromDocument(d)..addListener(_onItemUpdated)).toList();
+  }
+
+  Future<void> _loadUserAddress() async {
+    if (user.address != null && await calculateDelivery(user.address.lat, user.address.long)) {
+      address = user.address;
+      notifyListeners();
+    }
   }
 
   void addToCart(ProductData product) {
@@ -126,6 +136,7 @@ class CartManager extends ChangeNotifier {
     loading = true;
     this.address = address;
     if (await calculateDelivery(address.lat, address.long)) {
+      user.setAddress(address);
       loading = false;
     } else {
       loading = false;
