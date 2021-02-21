@@ -21,7 +21,11 @@ class AdressView extends StatelessWidget {
           Consumer<CartManager>(builder: (_, cartManager, __) {
             return PriceCard(
               buttonText: 'Continuar para o Pagamento',
-              onPressed: cartManager.isAdressValid ? () {} : null,
+              onPressed: cartManager.isAdressValid
+                  ? () {
+                      Navigator.of(context).pushNamed('/checkout');
+                    }
+                  : null,
             );
           })
         ],
