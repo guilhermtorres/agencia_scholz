@@ -12,19 +12,22 @@ class CheckoutView extends StatelessWidget {
       update: (_, cartManager, checkoutManager) => checkoutManager..updateCart(cartManager),
       lazy: false,
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Pagamento'),
-          centerTitle: true,
-        ),
-        body: ListView(
-          children: [
-            PriceCard(
-              buttonText: 'Finalizar Pedido',
-              onPressed: () {},
-            )
-          ],
-        ),
-      ),
+          appBar: AppBar(
+            title: const Text('Pagamento'),
+            centerTitle: true,
+          ),
+          body: Consumer(builder: (_, checkoutManager, __) {
+            return ListView(
+              children: [
+                PriceCard(
+                  buttonText: 'Finalizar Pedido',
+                  onPressed: () {
+                    checkoutManager.checkout();
+                  },
+                )
+              ],
+            );
+          })),
     );
   }
 }
