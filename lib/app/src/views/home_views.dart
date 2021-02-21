@@ -9,11 +9,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class HomeViews extends StatelessWidget {
-  final _pageController = PageController();
+class HomeViews extends StatefulWidget {
   final DocumentSnapshot snapshot;
 
-  HomeViews(this.snapshot);
+  const HomeViews(this.snapshot);
+
+  @override
+  _HomeViewsState createState() => _HomeViewsState();
+}
+
+class _HomeViewsState extends State<HomeViews> {
+  final _pageController = PageController();
+
   @override
   Widget build(BuildContext context) {
     return Provider(
@@ -30,7 +37,7 @@ class HomeViews extends StatelessWidget {
               ),
               Scaffold(
                 drawer: const CustomDrawer(),
-                body: ProductView(snapshot),
+                body: ProductView(widget.snapshot),
               ),
               Scaffold(
                 appBar: AppBar(
