@@ -16,7 +16,7 @@ class OrdersViews extends StatelessWidget {
         if (ordersManager.orders.isEmpty) {
           return const EmptyCard(
             title: 'Nenhum pedido encontrado! \n :(',
-            iconData: Icons.border_clear,
+            iconData: Icons.add_shopping_cart_sharp,
           );
         }
         return ListView.builder(
