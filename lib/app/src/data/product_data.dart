@@ -49,8 +49,8 @@ class Product extends ChangeNotifier {
 
   int get totalStock {
     int stock = 0;
-    for (final size in sizes) {
-      stock += size.stock;
+    for (final sizes in sizes) {
+      stock += sizes.stock;
     }
     return stock;
   }
@@ -61,9 +61,9 @@ class Product extends ChangeNotifier {
 
   num get basePrice {
     num lowest = double.infinity;
-    for (final size in sizes) {
-      if (size.price < lowest && size.hasStock) {
-        lowest = size.price;
+    for (final sizes in sizes) {
+      if (sizes.price < lowest && sizes.hasStock) {
+        lowest = sizes.price;
       }
     }
     return lowest;
@@ -134,7 +134,7 @@ class Product extends ChangeNotifier {
       name: name,
       description: description,
       images: List.from(images),
-      sizes: sizes.map((size) => size.clone()).toList(),
+      sizes: sizes.map((sizes) => sizes.clone()).toList(),
     );
   }
 

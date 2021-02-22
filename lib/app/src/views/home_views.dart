@@ -41,6 +41,10 @@ class _HomeViewsState extends State<HomeViews> {
                 body: ProductView(widget.snapshot),
               ),
               Scaffold(
+                appBar: AppBar(
+                  title: const Text('Meus Pedidos'),
+                  centerTitle: true,
+                ),
                 drawer: const CustomDrawer(),
                 body: OrdersViews(),
               ),

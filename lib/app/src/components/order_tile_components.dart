@@ -1,3 +1,4 @@
+import 'package:agencia_scholz/app/src/components/order_product_tile_components.dart';
 import 'package:agencia_scholz/app/src/data/order_data.dart';
 import 'package:flutter/material.dart';
 
@@ -8,9 +9,10 @@ class OrderTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-        margin: const EdgeInsets.all(16),
-        child: ExpansionTile(
-            title: Row(
+      elevation: 5,
+      margin: const EdgeInsets.all(16),
+      child: ExpansionTile(
+        title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
@@ -41,6 +43,15 @@ class OrderTile extends StatelessWidget {
               ),
             )
           ],
-        )));
+        ),
+        children: [
+          Column(
+            children: order.items.map((e) {
+              return OrderProductTile(e);
+            }).toList(),
+          )
+        ],
+      ),
+    );
   }
 }

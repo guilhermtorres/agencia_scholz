@@ -8,29 +8,24 @@ import 'package:provider/provider.dart';
 class OrdersViews extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('Meus Pedidos'),
-          centerTitle: true,
-        ),
-        body: Consumer<OrdersManager>(
-          builder: (_, ordersManager, __) {
-            if (ordersManager.user == null) {
-              return LoginCard();
-            }
-            if (ordersManager.orders.isEmpty) {
-              return const EmptyCard(
-                title: 'Nenhum pedido encontrado! \n :(',
-                iconData: Icons.border_clear,
-              );
-            }
-            return ListView.builder(
-              itemCount: ordersManager.orders.length,
-              itemBuilder: (_, index) {
-                return OrderTile(ordersManager.orders.reversed.toList()[index]);
-              },
-            );
+    return Scaffold(body: Consumer<OrdersManager>(
+      builder: (_, ordersManager, __) {
+        if (ordersManager.user == null) {
+          return LoginCard();
+        }
+        if (ordersManager.orders.isEmpty) {
+          return const EmptyCard(
+            title: 'Nenhum pedido encontrado! \n :(',
+            iconData: Icons.border_clear,
+          );
+        }
+        return ListView.builder(
+          itemCount: ordersManager.orders.length,
+          itemBuilder: (_, index) {
+            return OrderTile(ordersManager.orders.reversed.toList()[index]);
           },
-        ));
+        );
+      },
+    ));
   }
 }
