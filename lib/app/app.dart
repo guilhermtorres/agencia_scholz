@@ -1,3 +1,4 @@
+import 'package:agencia_scholz/app/src/data/order_data.dart';
 import 'package:agencia_scholz/app/src/data/product_data.dart';
 import 'package:agencia_scholz/app/src/models/admin_users_manager.dart';
 import 'package:agencia_scholz/app/src/models/cart_product_manager_model.dart';
@@ -8,6 +9,7 @@ import 'package:agencia_scholz/app/src/models/user_manager_model.dart';
 import 'package:agencia_scholz/app/src/views/adress_views.dart';
 import 'package:agencia_scholz/app/src/views/cart_views.dart';
 import 'package:agencia_scholz/app/src/views/checkout_views.dart';
+import 'package:agencia_scholz/app/src/views/confirmation_views.dart';
 import 'package:agencia_scholz/app/src/views/edit_product_detail_view.dart';
 import 'package:agencia_scholz/app/src/views/home_views.dart';
 import 'package:agencia_scholz/app/src/views/create_login_views.dart';
@@ -87,6 +89,10 @@ class AgenciaScholzApp extends StatelessWidget {
               return MaterialPageRoute(
                 builder: (_) => CartView(),
                 settings: settings,
+              );
+            case '/confirmation':
+              return MaterialPageRoute(
+                builder: (_) => ConfirmationViews(settings.arguments as Order),
               );
             case '/create_login_views':
               return MaterialPageRoute(

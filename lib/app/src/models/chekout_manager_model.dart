@@ -41,7 +41,7 @@ class CheckoutManager extends ChangeNotifier {
     await order.save();
 
     cartManager.clear();
-    onSuccess();
+    onSuccess(order);
     loading = false;
   }
 

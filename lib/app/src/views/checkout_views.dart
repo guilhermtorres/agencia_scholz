@@ -50,8 +50,9 @@ class CheckoutView extends StatelessWidget {
                   onPressed: () {
                     checkoutManager.checkout(onStockFail: (e) {
                       Navigator.of(context).popUntil((route) => route.settings.name == '/cart');
-                    }, onSuccess: () {
+                    }, onSuccess: (order) {
                       Navigator.of(context).popUntil((route) => route.settings.name == '/home_views');
+                      Navigator.of(context).pushNamed('/confirmation', arguments: order);
                     });
                   },
                 )
