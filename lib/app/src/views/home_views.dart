@@ -3,6 +3,7 @@ import 'package:agencia_scholz/app/src/models/page_manager_model.dart';
 import 'package:agencia_scholz/app/src/models/user_manager_model.dart';
 import 'package:agencia_scholz/app/src/views/admin_users_views.dart';
 import 'package:agencia_scholz/app/src/views/initial_tab_views.dart';
+import 'package:agencia_scholz/app/src/views/orders_views.dart';
 
 import 'package:agencia_scholz/app/src/views/products_views.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -40,14 +41,8 @@ class _HomeViewsState extends State<HomeViews> {
                 body: ProductView(widget.snapshot),
               ),
               Scaffold(
-                appBar: AppBar(
-                  title: const Text(
-                    'Meus Pedidos',
-                  ),
-                  centerTitle: true,
-                ),
                 drawer: const CustomDrawer(),
-                body: Container(),
+                body: OrdersViews(),
               ),
               Scaffold(
                 appBar: AppBar(
