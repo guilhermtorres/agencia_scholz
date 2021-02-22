@@ -2,6 +2,7 @@ import 'package:agencia_scholz/app/src/data/product_data.dart';
 import 'package:agencia_scholz/app/src/models/admin_users_manager.dart';
 import 'package:agencia_scholz/app/src/models/cart_product_manager_model.dart';
 import 'package:agencia_scholz/app/src/models/home_manager_model.dart';
+import 'package:agencia_scholz/app/src/models/orders_manager_model.dart';
 import 'package:agencia_scholz/app/src/models/product_manager_model.dart';
 import 'package:agencia_scholz/app/src/models/user_manager_model.dart';
 import 'package:agencia_scholz/app/src/views/adress_views.dart';
@@ -45,6 +46,11 @@ class AgenciaScholzApp extends StatelessWidget {
           create: (_) => AdminUsersManager(),
           lazy: false,
           update: (_, userManager, adminUserManager) => adminUserManager..updateUser(userManager),
+        ),
+        ChangeNotifierProxyProvider<UserManager, OrdersManager>(
+          create: (_) => OrdersManager(),
+          lazy: false,
+          update: (_, userManager, ordersManager) => ordersManager..updateUser(userManager.user),
         ),
       ],
       child: MaterialApp(

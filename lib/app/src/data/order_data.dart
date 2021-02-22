@@ -1,7 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:agencia_scholz/app/src/data/cart_product_data.dart';
 import 'package:agencia_scholz/app/src/models/address_model.dart';
 import 'package:agencia_scholz/app/src/models/cart_product_manager_model.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Order {
   Order.fromCartManager(CartManager cartManager) {
@@ -9,6 +10,19 @@ class Order {
     price = cartManager.totalPrice;
     userId = cartManager.user.id;
     address = cartManager.address;
+  }
+
+  Order.fromDocument(DocumentSnapshot doc) {
+    orderId = doc.documentID;
+
+    items = (doc.data['items'] as List<dynamic>).map((e) {
+      return CartProduct.fromMap(e as Map<String, dynamic>);
+    }).toList();
+
+    price = doc.data['price'] as num;
+    userId = doc.data['user'] as String;
+    address = Address.fromMap(doc.data['address'] as Map<String, dynamic>);
+    date = doc.data['date'] as Timestamp;
   }
 
   final Firestore firestore = Firestore.instance;
@@ -32,4 +46,9 @@ class Order {
   Address address;
 
   Timestamp date;
+
+  @override
+  String toString() {
+    return 'Order(orderId: $orderId, items: $items, price: $price, userId: $userId, address: $address, date: $date)';
+  }
 }
