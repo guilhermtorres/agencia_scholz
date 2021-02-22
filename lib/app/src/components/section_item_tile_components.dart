@@ -36,7 +36,7 @@ class ItemTile extends StatelessWidget {
                     content: product != null
                         ? ListTile(
                             contentPadding: EdgeInsets.zero,
-                            leading: Image.network(product.images.first as String),
+                            leading: Image.network(product.images.first),
                             title: Text(
                               product.name,
                               style: TextStyle(
@@ -79,7 +79,7 @@ class ItemTile extends StatelessWidget {
                             if (product != null) {
                               item.product = null;
                             } else {
-                              final ProductData product = await Navigator.of(context).pushNamed('/select_product') as ProductData;
+                              final Product product = await Navigator.of(context).pushNamed('/select_product') as Product;
                               item.product = product?.id;
                             }
                             Navigator.of(context).pop();

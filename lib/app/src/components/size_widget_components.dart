@@ -9,7 +9,7 @@ class SizeWidget extends StatelessWidget {
   final ItemSize size;
   @override
   Widget build(BuildContext context) {
-    final product = context.watch<ProductData>();
+    final product = context.watch<Product>();
     final selected = size == product.selectedSize;
 
     Color color;

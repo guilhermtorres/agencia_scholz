@@ -13,27 +13,53 @@ class CheckoutView extends StatelessWidget {
       update: (_, cartManager, checkoutManager) => checkoutManager..updateCart(cartManager),
       lazy: false,
       child: Scaffold(
-          key: scaffoldKey,
-          appBar: AppBar(
-            title: const Text('Pagamento'),
-            centerTitle: true,
-          ),
-          body: Consumer(builder: (_, checkoutManager, __) {
+        key: scaffoldKey,
+        appBar: AppBar(
+          title: const Text('Pagamento'),
+          centerTitle: true,
+        ),
+        body: Consumer<CheckoutManager>(
+          builder: (_, checkoutManager, __) {
+            if (checkoutManager.loading) {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation(Colors.greenAccent[400]),
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    Text(
+                      'Processando seu pagamento...',
+                      style: TextStyle(
+                        color: Theme.of(context).accentColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    )
+                  ],
+                ),
+              );
+            }
             return ListView(
               children: [
                 PriceCard(
                   buttonText: 'Finalizar Pedido',
                   onPressed: () {
                     checkoutManager.checkout(
-                      onStockFail: (e) {
-                        Navigator.of(context).popUntil((route) => route.settings.name == '/cart');
-                      },
-                    );
+                        onStockFail: (e) {},
+                        onSuccess: () {
+                          Navigator.of(context).popUntil((route) => route.settings.name == '/home_views');
+                        });
                   },
                 )
               ],
             );
-          })),
+          },
+        ),
+      ),
     );
   }
 }

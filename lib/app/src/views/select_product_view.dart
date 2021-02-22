@@ -21,7 +21,7 @@ class SelectProductView extends StatelessWidget {
                     Navigator.of(context).pop(product);
                   },
                   contentPadding: const EdgeInsets.all(20),
-                  leading: Image.network(product.images.first as String),
+                  leading: Image.network(product.images.first),
                   title: Text(
                     product.name,
                     style: TextStyle(

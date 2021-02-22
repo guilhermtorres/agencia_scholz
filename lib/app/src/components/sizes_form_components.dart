@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class SizesForm extends StatelessWidget {
   const SizesForm(this.product);
 
-  final ProductData product;
+  final Product product;
   @override
   Widget build(BuildContext context) {
     return Column(

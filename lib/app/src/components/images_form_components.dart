@@ -8,7 +8,7 @@ import 'image_source_sheet_components.dart';
 class ImagesForm extends StatelessWidget {
   const ImagesForm(this.product);
 
-  final ProductData product;
+  final Product product;
 
   @override
   Widget build(BuildContext context) {

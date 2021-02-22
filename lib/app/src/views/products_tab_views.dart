@@ -6,7 +6,7 @@ class ProductsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<QuerySnapshot>(
-      future: Firestore.instance.collection('products').getDocuments(),
+      future: Firestore.instance.collection('sellerprod').getDocuments(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return const Center(

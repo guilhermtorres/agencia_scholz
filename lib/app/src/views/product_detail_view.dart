@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ProductDetailView extends StatefulWidget {
-  final ProductData product;
+  final Product product;
   const ProductDetailView(this.product);
 
   @override
@@ -16,7 +16,7 @@ class ProductDetailView extends StatefulWidget {
 }
 
 class _ProductDetailViewState extends State<ProductDetailView> {
-  final ProductData product;
+  final Product product;
   String type;
   _ProductDetailViewState(this.product);
   @override
@@ -57,7 +57,7 @@ class _ProductDetailViewState extends State<ProductDetailView> {
               aspectRatio: 0.9,
               child: Carousel(
                 images: product.images.map((url) {
-                  return NetworkImage(url as String);
+                  return NetworkImage(url);
                 }).toList(),
                 dotSize: 5,
                 dotSpacing: 15,
@@ -131,11 +131,11 @@ class _ProductDetailViewState extends State<ProductDetailView> {
                     height: 25,
                   ),
                   if (product.hasStock)
-                    Consumer2<UserManager, ProductData>(builder: (_, userManager, productData, __) {
+                    Consumer2<UserManager, Product>(builder: (_, userManager, product, __) {
                       return SizedBox(
                         height: 45,
                         child: RaisedButton(
-                          onPressed: productData.selectedSize != null
+                          onPressed: product.selectedSize != null
                               ? () {
                                   if (userManager.isLoggedIn) {
                                     context.read<CartManager>().addToCart(product);

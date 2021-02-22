@@ -52,9 +52,7 @@ class AgenciaScholzApp extends StatelessWidget {
         onGenerateRoute: (settings) {
           switch (settings.name) {
             case '/home_views':
-              return MaterialPageRoute(
-                builder: (_) => HomeViews(snapshot),
-              );
+              return MaterialPageRoute(builder: (_) => HomeViews(snapshot), settings: settings);
             case '/select_product':
               return MaterialPageRoute(
                 builder: (_) => SelectProductView(),
@@ -73,14 +71,17 @@ class AgenciaScholzApp extends StatelessWidget {
               );
             case '/edit_product':
               return MaterialPageRoute(
-                builder: (_) => EditProductView(settings.arguments as ProductData),
+                builder: (_) => EditProductView(settings.arguments as Product),
               );
             case '/product':
               return MaterialPageRoute(
-                builder: (_) => ProductDetailView(settings.arguments as ProductData),
+                builder: (_) => ProductDetailView(settings.arguments as Product),
               );
             case '/cart':
-              return MaterialPageRoute(builder: (_) => CartView(), settings: settings);
+              return MaterialPageRoute(
+                builder: (_) => CartView(),
+                settings: settings,
+              );
             case '/create_login_views':
               return MaterialPageRoute(
                 builder: (_) => CreateLoginViews(),

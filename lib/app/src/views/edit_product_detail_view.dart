@@ -6,11 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class EditProductView extends StatelessWidget {
-  EditProductView(ProductData p)
+  EditProductView(Product p)
       : editing = p != null,
-        product = p != null ? p.clone() : ProductData();
+        product = p != null ? p.clone() : Product();
 
-  final ProductData product;
+  final Product product;
   final bool editing;
 
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();
@@ -98,13 +98,13 @@ class EditProductView extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    Consumer<ProductData>(
-                      builder: (_, productData, __) {
+                    Consumer<Product>(
+                      builder: (_, product, __) {
                         return SizedBox(
                           height: 45,
                           child: RaisedButton(
                             disabledColor: Theme.of(context).accentColor.withAlpha(100),
-                            onPressed: !productData.loading
+                            onPressed: !product.loading
                                 ? () async {
                                     if (formkey.currentState.validate()) {
                                       formkey.currentState.save();
@@ -116,7 +116,7 @@ class EditProductView extends StatelessWidget {
                                     }
                                   }
                                 : null,
-                            child: productData.loading
+                            child: product.loading
                                 ? const CircularProgressIndicator(
                                     valueColor: AlwaysStoppedAnimation(Colors.white),
                                   )

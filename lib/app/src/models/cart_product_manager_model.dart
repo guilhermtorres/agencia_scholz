@@ -50,7 +50,7 @@ class CartManager extends ChangeNotifier {
     }
   }
 
-  void addToCart(ProductData product) {
+  void addToCart(Product product) {
     try {
       final e = items.firstWhere((p) => p.stackable(product));
       e.increment();
@@ -68,6 +68,14 @@ class CartManager extends ChangeNotifier {
     items.removeWhere((p) => p.id == cartProduct.id);
     user.cartReference.document(cartProduct.id).delete();
     cartProduct.removeListener(_onItemUpdated);
+    notifyListeners();
+  }
+
+  void clear() {
+    for (final CartProduct in items) {
+      user.cartReference.document(CartProduct.id).delete();
+    }
+    items.clear();
     notifyListeners();
   }
 

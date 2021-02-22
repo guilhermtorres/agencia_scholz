@@ -5,21 +5,30 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:uuid/uuid.dart';
 
-class ProductData extends ChangeNotifier {
-  ProductData({this.id, this.name, this.description, this.images, this.sizes, this.type}) {
+class Product extends ChangeNotifier {
+  Product({this.id, this.name, this.description, this.images, this.sizes}) {
     images = images ?? [];
     sizes = sizes ?? [];
   }
 
-  String id;
+  Product.fromDocument(DocumentSnapshot document) {
+    id = document.documentID;
+    name = document['name'] as String;
+    description = document['description'] as String;
+    images = List<String>.from(document.data['images'] as List<dynamic>);
+    sizes = (document.data['sizes'] as List<dynamic> ?? []).map((s) => ItemSize.fromMap(s as Map<String, dynamic>)).toList();
+  }
 
+  final Firestore firestore = Firestore.instance;
+  final FirebaseStorage storage = FirebaseStorage.instance;
+
+  DocumentReference get firestoreRef => firestore.document('sellerprod/$id');
+  StorageReference get storageRef => storage.ref().child('sellerprod').child(id);
+
+  String id;
   String name;
   String description;
-
-  double price;
-
-  List images = [];
-  List type;
+  List<String> images;
   List<ItemSize> sizes;
 
   List<dynamic> newImages;
@@ -33,25 +42,10 @@ class ProductData extends ChangeNotifier {
 
   ItemSize _selectedSize;
   ItemSize get selectedSize => _selectedSize;
-
   set selectedSize(ItemSize value) {
     _selectedSize = value;
     notifyListeners();
   }
-
-  ProductData.fromDocument(DocumentSnapshot snapshot) {
-    id = snapshot.documentID;
-    name = snapshot.data['name'] as String;
-    description = snapshot.data['description'] as String;
-    price = snapshot.data['price'] as double;
-    images = snapshot.data['images'] as List<dynamic>;
-    sizes = (snapshot.data['sizes'] as List<dynamic> ?? []).map((s) => ItemSize.fromMap(s as Map<String, dynamic>)).toList();
-  }
-
-  final Firestore firestore = Firestore.instance;
-  final FirebaseStorage storage = FirebaseStorage.instance;
-  DocumentReference get firestoreRef => firestore.document('sellerprod/$id');
-  StorageReference get storageRef => storage.ref().child('icones produtos e serviços').child('items').child('id');
 
   int get totalStock {
     int stock = 0;
@@ -75,9 +69,9 @@ class ProductData extends ChangeNotifier {
     return lowest;
   }
 
-  ItemSize findSize(String title) {
+  ItemSize findSize(String name) {
     try {
-      return sizes.firstWhere((s) => s.name == title);
+      return sizes.firstWhere((s) => s.name == name);
     } catch (e) {
       return null;
     }
@@ -102,6 +96,7 @@ class ProductData extends ChangeNotifier {
     } else {
       await firestoreRef.updateData(data);
     }
+
     final List<String> updateImages = [];
 
     for (final newImage in newImages) {
@@ -118,10 +113,10 @@ class ProductData extends ChangeNotifier {
     for (final image in images) {
       if (!newImages.contains(image)) {
         try {
-          final ref = await storage.getReferenceFromUrl(image as String);
+          final ref = await storage.getReferenceFromUrl(image);
           await ref.delete();
         } catch (e) {
-          debugPrint('Falha ao deletar $image');
+          debugPrint('Falha ao deletar $images');
         }
       }
     }
@@ -129,17 +124,22 @@ class ProductData extends ChangeNotifier {
     await firestoreRef.updateData({'images': updateImages});
 
     images = updateImages;
+
     loading = false;
   }
 
-  ProductData clone() {
-    return ProductData(
+  Product clone() {
+    return Product(
       id: id,
       name: name,
-      type: type,
       description: description,
       images: List.from(images),
       sizes: sizes.map((size) => size.clone()).toList(),
     );
+  }
+
+  @override
+  String toString() {
+    return 'Product{id: $id, name: $name, description: $description, images: $images, sizes: $sizes, newImages: $newImages}';
   }
 }

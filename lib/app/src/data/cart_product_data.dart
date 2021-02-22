@@ -17,7 +17,7 @@ class CartProduct extends ChangeNotifier {
     size = document.data['size'] as String;
 
     firestore.document('sellerprod/$productId').get().then((doc) {
-      product = ProductData.fromDocument(doc);
+      product = Product.fromDocument(doc);
     });
   }
 
@@ -29,9 +29,11 @@ class CartProduct extends ChangeNotifier {
   int quantity;
   String size;
 
-  ProductData _product;
-  ProductData get product => _product;
-  set product(ProductData value) {
+  num fixedPrice;
+
+  Product _product;
+  Product get product => _product;
+  set product(Product value) {
     _product = value;
     notifyListeners();
   }
@@ -56,7 +58,16 @@ class CartProduct extends ChangeNotifier {
     };
   }
 
-  bool stackable(ProductData product) {
+  Map<String, dynamic> toOrderItemMap() {
+    return {
+      'pid': productId,
+      'quantity': quantity,
+      'size': size,
+      'fixedPrice': fixedPrice ?? unitPrice,
+    };
+  }
+
+  bool stackable(Product product) {
     return product.id == productId && product.selectedSize.name == size;
   }
 

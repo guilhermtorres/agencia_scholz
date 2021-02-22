@@ -9,7 +9,7 @@ class ProductManager extends ChangeNotifier {
 
   final Firestore firestore = Firestore.instance;
 
-  List<ProductData> allProducts = [];
+  List<Product> allProducts = [];
 
   String _search = '';
   String get search => _search;
@@ -19,8 +19,8 @@ class ProductManager extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<ProductData> get filteredProducts {
-    final List<ProductData> filteredProducts = [];
+  List<Product> get filteredProducts {
+    final List<Product> filteredProducts = [];
 
     if (search.isEmpty) {
       filteredProducts.addAll(allProducts);
@@ -33,12 +33,12 @@ class ProductManager extends ChangeNotifier {
   Future<void> loadAllProducts() async {
     final QuerySnapshot snapProducts = await firestore.collection('sellerprod').getDocuments();
 
-    allProducts = snapProducts.documents.map((d) => ProductData.fromDocument(d)).toList();
+    allProducts = snapProducts.documents.map((d) => Product.fromDocument(d)).toList();
 
     notifyListeners();
   }
 
-  ProductData findProductById(String id) {
+  Product findProductById(String id) {
     try {
       return allProducts.firstWhere((p) => p.id == id);
     } catch (e) {
@@ -46,9 +46,9 @@ class ProductManager extends ChangeNotifier {
     }
   }
 
-  void update(ProductData productData) {
-    allProducts.removeWhere((p) => p.id == productData.id);
-    allProducts.add(productData);
+  void update(Product product) {
+    allProducts.removeWhere((p) => p.id == product.id);
+    allProducts.add(product);
     notifyListeners();
   }
 }

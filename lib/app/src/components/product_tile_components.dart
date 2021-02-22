@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class ProductTile extends StatelessWidget {
   final String tipo;
-  final ProductData product;
+  final Product product;
 
   const ProductTile(this.tipo, this.product);
   @override
@@ -24,7 +24,7 @@ class ProductTile extends StatelessWidget {
                   AspectRatio(
                     aspectRatio: 0.8,
                     child: Image.network(
-                      product.images[0] as String,
+                      product.images[0],
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -71,7 +71,7 @@ class ProductTile extends StatelessWidget {
                   ),
                   Flexible(
                     child: Image.network(
-                      product.images[0] as String,
+                      product.images[0],
                       fit: BoxFit.cover,
                       height: 200,
                     ),

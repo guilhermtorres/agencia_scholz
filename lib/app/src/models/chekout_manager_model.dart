@@ -1,3 +1,4 @@
+import 'package:agencia_scholz/app/src/data/order_data.dart';
 import 'package:agencia_scholz/app/src/data/product_data.dart';
 import 'package:agencia_scholz/app/src/models/cart_product_manager_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -5,20 +6,43 @@ import 'package:flutter/material.dart';
 
 class CheckoutManager extends ChangeNotifier {
   CartManager cartManager;
+
+  bool _loading = false;
+  bool get loading => _loading;
+  set loading(bool value) {
+    _loading = value;
+    notifyListeners();
+  }
+
   final Firestore firestore = Firestore.instance;
+
   // ignore: use_setters_to_change_properties
   void updateCart(CartManager cartManager) {
     this.cartManager = cartManager;
   }
 
-  void checkout({Function onStockFail}) async {
+  Future<void> checkout({Function onStockFail, Function onSuccess}) async {
+    loading = true;
     try {
       await _decrementStock();
     } catch (e) {
       onStockFail(e);
-      debugPrint(e.toString());
+      loading = false;
+      return;
     }
-    _getOrderId().then((value) => print(value));
+
+    // TODO: PROCESSAR PAGAMENTO
+
+    final orderId = await _getOrderId();
+
+    final order = Order.fromCartManager(cartManager);
+    order.orderId = orderId.toString();
+
+    await order.save();
+
+    cartManager.clear();
+    onSuccess();
+    loading = false;
   }
 
   Future<int> _getOrderId() async {
@@ -30,7 +54,7 @@ class CheckoutManager extends ChangeNotifier {
         final orderId = doc.data['current'] as int;
         await tx.update(ref, {'current': orderId + 1});
         return {'orderId': orderId};
-      }, timeout: const Duration(seconds: 10));
+      });
       return result['orderId'] as int;
     } catch (e) {
       debugPrint(e.toString());
@@ -39,45 +63,41 @@ class CheckoutManager extends ChangeNotifier {
   }
 
   Future<void> _decrementStock() {
-// 1. Ler todos os estoques
-// 2. decremento localmente os estoques
-// 3. salvar os estoques no firebase
+    // 1. Ler todos os estoques 3xM
+    // 2. Decremento localmente os estoques 2xM
+    // 3. Salvar os estoques no firebase 2xM
 
     return firestore.runTransaction((tx) async {
-      final List<ProductData> productsToUpdate = [];
-      final List<ProductData> productsWithouStock = [];
+      final List<Product> productsToUpdate = [];
+      final List<Product> productsWithoutStock = [];
 
       for (final cartProduct in cartManager.items) {
-        ProductData product;
+        Product product;
+
         if (productsToUpdate.any((p) => p.id == cartProduct.productId)) {
           product = productsToUpdate.firstWhere((p) => p.id == cartProduct.productId);
         } else {
-          final doc = await tx.get(firestore.document('products/${cartProduct.productId}'));
-          product = ProductData.fromDocument(doc);
+          final doc = await tx.get(firestore.document('sellerprod/${cartProduct.productId}'));
+          product = Product.fromDocument(doc);
         }
 
         cartProduct.product = product;
 
         final size = product.findSize(cartProduct.size);
         if (size.stock - cartProduct.quantity < 0) {
-          productsWithouStock.add(product);
-          // FALHAR
+          productsWithoutStock.add(product);
         } else {
           size.stock -= cartProduct.quantity;
           productsToUpdate.add(product);
         }
       }
-      if (productsWithouStock.isNotEmpty) {
-        return Future.error('${productsWithouStock.length} produto(s) sem estoque! :(');
+
+      if (productsWithoutStock.isNotEmpty) {
+        return Future.error('${productsWithoutStock.length} produtos sem estoque');
       }
 
       for (final product in productsToUpdate) {
-        tx.update(
-          firestore.document(
-            'products/${product.id}',
-          ),
-          {'sizes': product.exportSizeList()},
-        );
+        tx.update(firestore.document('sellerprod/${product.id}'), {'sizes': product.exportSizeList()});
       }
     });
   }
