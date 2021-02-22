@@ -39,6 +39,7 @@ class CartView extends StatelessWidget {
               ),
               PriceCard(
                 buttonText: 'Continuar para Entrega',
+                buttonText2: 'Continuar Comprando...',
                 onPressed: cartManager.isCartValid
                     ? () {
                         Navigator.of(context).pushNamed('/adress');
