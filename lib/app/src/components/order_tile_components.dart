@@ -3,9 +3,10 @@ import 'package:agencia_scholz/app/src/data/order_data.dart';
 import 'package:flutter/material.dart';
 
 class OrderTile extends StatelessWidget {
-  const OrderTile(this.order);
+  const OrderTile(this.order, {this.showControls = false});
 
   final Order order;
+  final bool showControls;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -49,6 +50,38 @@ class OrderTile extends StatelessWidget {
             children: order.items.map((e) {
               return OrderProductTile(e);
             }).toList(),
+          ),
+          SizedBox(
+            height: 50,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                RaisedButton(
+                  onPressed: () {},
+                  textColor: Colors.white,
+                  color: Colors.red,
+                  child: const Text('Cancelar'),
+                ),
+                RaisedButton(
+                  onPressed: () {},
+                  textColor: Colors.white,
+                  color: Theme.of(context).primaryColor,
+                  child: const Text('Recuar Pedido'),
+                ),
+                RaisedButton(
+                  onPressed: () {},
+                  textColor: Colors.white,
+                  color: Theme.of(context).primaryColor,
+                  child: const Text('Avançar Pedido'),
+                ),
+                RaisedButton(
+                  onPressed: () {},
+                  textColor: Colors.white,
+                  color: Theme.of(context).accentColor,
+                  child: const Text('Endereço do cliente'),
+                ),
+              ],
+            ),
           )
         ],
       ),

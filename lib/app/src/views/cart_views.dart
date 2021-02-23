@@ -39,12 +39,36 @@ class CartView extends StatelessWidget {
               ),
               PriceCard(
                 buttonText: 'Continuar para Entrega',
-                buttonText2: 'Continuar Comprando...',
                 onPressed: cartManager.isCartValid
                     ? () {
                         Navigator.of(context).pushNamed('/adress');
                       }
                     : null,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(25),
+                child: Card(
+                  elevation: 5,
+                  child: SizedBox(
+                    height: 45,
+                    child: RaisedButton(
+                      elevation: 8,
+                      color: Colors.white,
+                      disabledColor: Theme.of(context).accentColor.withAlpha(100),
+                      disabledTextColor: Colors.grey[200],
+                      textColor: Theme.of(context).accentColor,
+                      onPressed: () {
+                        Navigator.of(context).popUntil((route) => route.settings.name == '/home_views');
+                      },
+                      child: const Text(
+                        'Continuar comprando...',
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ],
           );

@@ -3,9 +3,12 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 class PriceCard extends StatelessWidget {
-  const PriceCard({this.buttonText, this.onPressed, this.buttonText2});
+  const PriceCard({
+    this.buttonText,
+    this.onPressed,
+  });
   final String buttonText;
-  final String buttonText2;
+
   final VoidCallback onPressed;
 
   @override
@@ -95,28 +98,6 @@ class PriceCard extends StatelessWidget {
                 onPressed: onPressed,
                 child: Text(
                   buttonText,
-                  style: const TextStyle(
-                    fontSize: 18,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            SizedBox(
-              height: 45,
-              child: RaisedButton(
-                elevation: 8,
-                color: Colors.white,
-                disabledColor: Theme.of(context).accentColor.withAlpha(100),
-                disabledTextColor: Colors.grey[200],
-                textColor: Theme.of(context).accentColor,
-                onPressed: () {
-                  Navigator.of(context).pushNamed('/products');
-                },
-                child: Text(
-                  buttonText2,
                   style: const TextStyle(
                     fontSize: 18,
                   ),

@@ -76,6 +76,7 @@ class AgenciaScholzApp extends StatelessWidget {
             case '/products':
               return MaterialPageRoute(
                 builder: (_) => ProductView(snapshot),
+                settings: settings,
               );
             case '/login':
               return MaterialPageRoute(
