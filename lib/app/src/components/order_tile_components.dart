@@ -36,9 +36,9 @@ class OrderTile extends StatelessWidget {
               ],
             ),
             Text(
-              'Em transporte',
+              order.statusText,
               style: TextStyle(
-                color: Theme.of(context).accentColor,
+                color: order.status == Status.canceled ? Colors.red : Theme.of(context).accentColor,
                 fontSize: 14,
               ),
             )
