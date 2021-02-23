@@ -1,6 +1,7 @@
 import 'package:agencia_scholz/app/src/components/custom_drawer_components.dart';
 import 'package:agencia_scholz/app/src/models/page_manager_model.dart';
 import 'package:agencia_scholz/app/src/models/user_manager_model.dart';
+import 'package:agencia_scholz/app/src/views/admin_orders_views.dart';
 import 'package:agencia_scholz/app/src/views/admin_users_views.dart';
 import 'package:agencia_scholz/app/src/views/initial_tab_views.dart';
 import 'package:agencia_scholz/app/src/views/orders_views.dart';
@@ -61,15 +62,14 @@ class _HomeViewsState extends State<HomeViews> {
               if (userManager.adminEnabled) ...[
                 AdminUsersViews(),
                 Scaffold(
-                  appBar: AppBar(
-                    title: const Text(
-                      'Pedidos',
+                    appBar: AppBar(
+                      title: const Text(
+                        'Todos os Pedidos',
+                      ),
+                      centerTitle: true,
                     ),
-                    centerTitle: true,
-                  ),
-                  drawer: const CustomDrawer(),
-                  body: Container(),
-                ),
+                    drawer: const CustomDrawer(),
+                    body: AdminOrdersViews()),
               ]
             ],
           );
