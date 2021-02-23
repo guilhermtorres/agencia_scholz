@@ -51,37 +51,56 @@ class OrderTile extends StatelessWidget {
               return OrderProductTile(e);
             }).toList(),
           ),
-          SizedBox(
-            height: 50,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: [
-                RaisedButton(
-                  onPressed: () {},
-                  textColor: Colors.white,
-                  color: Colors.red,
-                  child: const Text('Cancelar'),
-                ),
-                RaisedButton(
-                  onPressed: () {},
-                  textColor: Colors.white,
-                  color: Theme.of(context).primaryColor,
-                  child: const Text('Recuar Pedido'),
-                ),
-                RaisedButton(
-                  onPressed: () {},
-                  textColor: Colors.white,
-                  color: Theme.of(context).primaryColor,
-                  child: const Text('Avançar Pedido'),
-                ),
-                RaisedButton(
-                  onPressed: () {},
-                  textColor: Colors.white,
-                  color: Theme.of(context).accentColor,
-                  child: const Text('Endereço do cliente'),
-                ),
-              ],
+          if (showControls)
+            SizedBox(
+              height: 50,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  RaisedButton(
+                    onPressed: () {},
+                    textColor: Colors.white,
+                    color: Colors.red,
+                    child: const Text('Cancelar'),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  RaisedButton(
+                    onPressed: () {},
+                    textColor: Colors.white,
+                    color: Theme.of(context).primaryColor,
+                    child: const Text('Recuar Pedido'),
+                  ),
+                  const SizedBox(
+                    width: 2,
+                  ),
+                  RaisedButton(
+                    onPressed: () {},
+                    textColor: Colors.white,
+                    color: Theme.of(context).primaryColor,
+                    child: const Text('Avançar Pedido'),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  RaisedButton(
+                    onPressed: () {},
+                    textColor: Colors.white,
+                    color: Theme.of(context).accentColor,
+                    child: const Text('Endereço do cliente'),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                ],
+              ),
             ),
+          const SizedBox(
+            height: 10,
           )
         ],
       ),

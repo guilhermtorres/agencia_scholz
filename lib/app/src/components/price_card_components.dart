@@ -3,11 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 class PriceCard extends StatelessWidget {
-  const PriceCard({
-    this.buttonText,
-    this.onPressed,
-  });
+  const PriceCard({this.buttonText, this.onPressed, this.showControls = false});
   final String buttonText;
+  final bool showControls;
 
   final VoidCallback onPressed;
 
@@ -104,6 +102,30 @@ class PriceCard extends StatelessWidget {
                 ),
               ),
             ),
+            if (showControls)
+              const SizedBox(
+                height: 10,
+              ),
+            if (showControls)
+              SizedBox(
+                height: 45,
+                child: RaisedButton(
+                  elevation: 8,
+                  color: Colors.white,
+                  disabledColor: Theme.of(context).accentColor.withAlpha(100),
+                  disabledTextColor: Colors.grey[200],
+                  textColor: Theme.of(context).accentColor,
+                  onPressed: () {
+                    Navigator.of(context).popUntil((route) => route.settings.name == '/home_views');
+                  },
+                  child: const Text(
+                    'Continuar comprando...',
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+              ),
             const SizedBox(
               height: 25,
             ),

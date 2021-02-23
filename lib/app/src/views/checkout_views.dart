@@ -48,12 +48,15 @@ class CheckoutView extends StatelessWidget {
                 PriceCard(
                   buttonText: 'Finalizar Pedido',
                   onPressed: () {
-                    checkoutManager.checkout(onStockFail: (e) {
-                      Navigator.of(context).popUntil((route) => route.settings.name == '/cart');
-                    }, onSuccess: (order) {
-                      Navigator.of(context).popUntil((route) => route.settings.name == '/products');
-                      Navigator.of(context).pushNamed('/confirmation', arguments: order);
-                    });
+                    checkoutManager.checkout(
+                      onStockFail: (e) {
+                        Navigator.of(context).popUntil((route) => route.settings.name == '/cart');
+                      },
+                      onSuccess: (order) {
+                        Navigator.of(context).popUntil((route) => route.settings.name == '/home_views');
+                        Navigator.of(context).pushNamed('/confirmation', arguments: order);
+                      },
+                    );
                   },
                 )
               ],
