@@ -51,7 +51,7 @@ class OrderTile extends StatelessWidget {
               return OrderProductTile(e);
             }).toList(),
           ),
-          if (showControls)
+          if (showControls && order.status != Status.canceled)
             SizedBox(
               height: 50,
               child: ListView(
@@ -70,7 +70,7 @@ class OrderTile extends StatelessWidget {
                     width: 10,
                   ),
                   RaisedButton(
-                    onPressed: () {},
+                    onPressed: order.back,
                     textColor: Colors.white,
                     color: Theme.of(context).primaryColor,
                     child: const Text('Recuar Pedido'),
@@ -79,7 +79,7 @@ class OrderTile extends StatelessWidget {
                     width: 2,
                   ),
                   RaisedButton(
-                    onPressed: () {},
+                    onPressed: order.advance,
                     textColor: Colors.white,
                     color: Theme.of(context).primaryColor,
                     child: const Text('Avançar Pedido'),
