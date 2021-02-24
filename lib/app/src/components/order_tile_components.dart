@@ -1,4 +1,5 @@
 import 'package:agencia_scholz/app/src/components/cancel_order_dialog.dart';
+import 'package:agencia_scholz/app/src/components/export_address_dialog.dart';
 import 'package:agencia_scholz/app/src/components/order_product_tile_components.dart';
 import 'package:agencia_scholz/app/src/data/order_data.dart';
 import 'package:flutter/material.dart';
@@ -91,7 +92,9 @@ class OrderTile extends StatelessWidget {
                     width: 10,
                   ),
                   RaisedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      showDialog(context: context, builder: (_) => ExportAddressDialog(order.address));
+                    },
                     textColor: Colors.white,
                     color: Theme.of(context).accentColor,
                     child: const Text('Endereço do cliente'),
