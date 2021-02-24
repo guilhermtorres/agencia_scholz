@@ -26,6 +26,7 @@ dependencies:
   dio: ^3.0.9
   carousel_pro: ^1.0.0
   geolocator: ^5.3.1
+  sliding_up_panel: ^1.0.2
   transparent_image: ^1.0.0
   alphabet_list_scroll_view: ^1.0.6
   faker: ^1.2.0
