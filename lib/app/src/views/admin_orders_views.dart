@@ -93,10 +93,13 @@ class AdminOrdersViews extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: Status.values.map((s) {
                     return CheckboxListTile(
+                      activeColor: Theme.of(context).accentColor,
                       title: Text(Order.getStatusText(s)),
                       dense: true,
-                      value: true,
-                      onChanged: (v) {},
+                      value: ordersManager.statusFilter.contains(s),
+                      onChanged: (v) {
+                        ordersManager.setStatusFilter(enabled: v, status: s);
+                      },
                     );
                   }).toList(),
                 )),
