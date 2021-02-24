@@ -59,7 +59,10 @@ class AdminOrdersViews extends StatelessWidget {
                         );
                       },
                     ),
-                  )
+                  ),
+                const SizedBox(
+                  height: 120,
+                ),
               ],
             ),
             minHeight: 40,
@@ -89,20 +92,21 @@ class AdminOrdersViews extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                    child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: Status.values.map((s) {
-                    return CheckboxListTile(
-                      activeColor: Theme.of(context).accentColor,
-                      title: Text(Order.getStatusText(s)),
-                      dense: true,
-                      value: ordersManager.statusFilter.contains(s),
-                      onChanged: (v) {
-                        ordersManager.setStatusFilter(enabled: v, status: s);
-                      },
-                    );
-                  }).toList(),
-                )),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: Status.values.map((s) {
+                      return CheckboxListTile(
+                        activeColor: Theme.of(context).accentColor,
+                        title: Text(Order.getStatusText(s)),
+                        dense: true,
+                        value: ordersManager.statusFilter.contains(s),
+                        onChanged: (v) {
+                          ordersManager.setStatusFilter(enabled: v, status: s);
+                        },
+                      );
+                    }).toList(),
+                  ),
+                ),
               ],
             ),
           );
