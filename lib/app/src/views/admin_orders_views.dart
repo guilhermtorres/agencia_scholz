@@ -7,8 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-class AdminOrdersViews extends StatelessWidget {
+class AdminOrdersViews extends StatefulWidget {
+  @override
+  _AdminOrdersViewsState createState() => _AdminOrdersViewsState();
+}
+
+class _AdminOrdersViewsState extends State<AdminOrdersViews> {
   final PanelController panelController = PanelController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
