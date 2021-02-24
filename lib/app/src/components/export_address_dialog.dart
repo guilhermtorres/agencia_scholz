@@ -13,7 +13,7 @@ class ExportAddressDialog extends StatelessWidget {
           '${address.district}\n'
           '${address.city}/${address.state}\n'
           '${address.zipCode}'),
-      contentPadding: EdgeInsets.all(10),
+      contentPadding: const EdgeInsets.all(10),
       actions: [
         FlatButton(
           onPressed: () {
