@@ -64,7 +64,6 @@ class AgenciaScholzApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        initialRoute: '/home_views',
         onGenerateRoute: (settings) {
           switch (settings.name) {
             case '/home_views':
@@ -111,6 +110,7 @@ class AgenciaScholzApp extends StatelessWidget {
               return MaterialPageRoute(
                 builder: (_) => CreateLoginViews(),
               );
+            case '/':
             default:
               return MaterialPageRoute(
                 builder: (_) => HomeViews(snapshot),
