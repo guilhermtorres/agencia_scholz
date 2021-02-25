@@ -5,7 +5,7 @@ import 'package:agencia_scholz/app/src/views/admin_orders_views.dart';
 import 'package:agencia_scholz/app/src/views/admin_users_views.dart';
 import 'package:agencia_scholz/app/src/views/initial_tab_views.dart';
 import 'package:agencia_scholz/app/src/views/orders_views.dart';
-
+import 'package:flutter/services.dart';
 import 'package:agencia_scholz/app/src/views/products_views.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +22,11 @@ class HomeViews extends StatefulWidget {
 
 class _HomeViewsState extends State<HomeViews> {
   final _pageController = PageController();
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  }
 
   @override
   Widget build(BuildContext context) {
