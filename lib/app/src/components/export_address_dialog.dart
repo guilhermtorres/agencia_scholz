@@ -1,6 +1,7 @@
 import 'package:agencia_scholz/app/src/models/address_model.dart';
 import 'package:flutter/material.dart';
 import 'package:gallery_saver/gallery_saver.dart';
+
 import 'package:screenshot/screenshot.dart';
 
 class ExportAddressDialog extends StatelessWidget {
@@ -29,10 +30,10 @@ class ExportAddressDialog extends StatelessWidget {
       actions: [
         FlatButton(
           onPressed: () async {
-            Navigator.of(context).pop();
             final file = await screenshotController.capture();
 
-            /* await GallerySaver.saveImage(file.path); */
+            await GallerySaver.saveImage(file.path);
+            Navigator.of(context).pop();
           },
           textColor: Theme.of(context).accentColor,
           child: const Text(
